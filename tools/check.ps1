@@ -19,10 +19,13 @@ function Invoke-CheckedGodot([string[]]$GodotArgs) {
 }
 Invoke-CheckedGodot @('--headless', '--editor', '--import', '--quit')
 Invoke-CheckedGodot @('--headless', '--script', 'res://tests/player_milestone.gd')
+Invoke-CheckedGodot @('--headless', '--script', 'res://tests/responsiveness.gd')
 if ($Visual) {
+    Invoke-CheckedGodot @('--script', 'res://tests/isometric_visibility.gd')
     Invoke-CheckedGodot @('--script', 'res://tests/edge_cases.gd')
     Invoke-CheckedGodot @('--script', 'res://tests/render_views.gd')
 } else {
+    Invoke-CheckedGodot @('--headless', '--script', 'res://tests/isometric_visibility.gd')
     Invoke-CheckedGodot @('--headless', '--script', 'res://tests/edge_cases.gd')
 }
 Write-Host 'VALIDATION PASSED'

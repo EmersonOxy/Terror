@@ -16,3 +16,5 @@ Comandos (na raiz; Godot via GODOT_BIN, PATH ou instalação local detectada):
 - ./tools/check.ps1 -Visual: também testa mouse com janela e salva duas imagens em artifacts/.
 - ./tools/check.ps1 -Godot 'caminho/do/godot_console.exe': instalação alternativa.
 - Abrir project.godot no Godot e F6 na cena de teste ou F5 para executar.
+
+- Visibilidade isométrica: IsometricOcclusion detecta apenas colliders World no grupo camera_occluder; meshes descendentes usam cópias privadas BaseMaterial3D via ObstacleFade. Excluir pisos. Shaders personalizados exigirão adaptação explícita. VisualHighlight pertence ao CharacterVisual, sem dependência da cápsula. Configuração em CameraConfig, restauração obrigatória na saída.

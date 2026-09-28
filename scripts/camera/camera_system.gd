@@ -8,6 +8,7 @@ signal mode_changed(mode_name: String)
 @export var arm: SpringArm3D
 @export var third: Camera3D
 @export var iso: Camera3D
+@export var occlusion: IsometricOcclusion
 var mode: String = "Terceira pessoa"
 var yaw: float = 0.0
 var pitch: float = -0.22
@@ -15,6 +16,7 @@ var focus_height: float = 1.35
 var _anchor: Vector3
 
 func _ready() -> void:
+	occlusion.target = target
 	_anchor = target.global_position
 	focus_height = config.height
 	arm.spring_length = config.distance
@@ -27,6 +29,8 @@ func movement_orientation() -> Basis:
 	return Basis(Vector3.UP, deg_to_rad(config.iso_yaw) if mode == "Isometrica" else yaw)
 
 func set_mode(isometric: bool) -> void:
+	if not isometric:
+		occlusion.reset()
 	mode = "Isometrica" if isometric else "Terceira pessoa"
 	iso.current = isometric
 	third.current = not isometric

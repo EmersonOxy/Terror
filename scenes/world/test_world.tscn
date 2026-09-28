@@ -1,404 +1,549 @@
-[gd_scene load_steps=73 format=3]
-[ext_resource type="Script" path="res://scripts/world/test_world.gd" id="world"]
-[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="player"]
+[gd_scene format=3 uid="uid://dm7lclr7lq0c3"]
+
 [ext_resource type="PackedScene" path="res://scenes/world/camera_system.tscn" id="camera"]
-[ext_resource type="Script" path="res://scripts/ui/debug_hud.gd" id="hud"]
-[ext_resource type="Script" path="res://scripts/interactions/test_interactable.gd" id="interaction"]
+[ext_resource type="Script" uid="uid://pmbp4ensnbaj" path="res://scripts/ui/debug_hud.gd" id="hud"]
+[ext_resource type="Script" uid="uid://csij67151sy62" path="res://scripts/interactions/test_interactable.gd" id="interaction"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="player"]
+[ext_resource type="Script" uid="uid://dbq0gdfmcagww" path="res://scripts/world/test_world.gd" id="world"]
+
+[sub_resource type="BoxShape3D" id="b1s"]
+size = Vector3(30, 0.5, 30)
+
+[sub_resource type="StandardMaterial3D" id="b1c"]
+albedo_color = Color(0.27, 0.29, 0.32, 1)
+
+[sub_resource type="BoxMesh" id="b1m"]
+size = Vector3(30, 0.5, 30)
+
+[sub_resource type="BoxShape3D" id="b2s"]
+size = Vector3(30, 1, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="b2c"]
+albedo_color = Color(0.43, 0.46, 0.49, 1)
+
+[sub_resource type="BoxMesh" id="b2m"]
+size = Vector3(30, 1, 0.3)
+
+[sub_resource type="BoxShape3D" id="b3s"]
+size = Vector3(30, 1, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="b3c"]
+albedo_color = Color(0.43, 0.46, 0.49, 1)
+
+[sub_resource type="BoxMesh" id="b3m"]
+size = Vector3(30, 1, 0.3)
+
+[sub_resource type="BoxShape3D" id="b4s"]
+size = Vector3(0.3, 1, 30)
+
+[sub_resource type="StandardMaterial3D" id="b4c"]
+albedo_color = Color(0.43, 0.46, 0.49, 1)
+
+[sub_resource type="BoxMesh" id="b4m"]
+size = Vector3(0.3, 1, 30)
+
+[sub_resource type="BoxShape3D" id="b5s"]
+size = Vector3(0.3, 1, 30)
+
+[sub_resource type="StandardMaterial3D" id="b5c"]
+albedo_color = Color(0.43, 0.46, 0.49, 1)
+
+[sub_resource type="BoxMesh" id="b5m"]
+size = Vector3(0.3, 1, 30)
+
+[sub_resource type="BoxShape3D" id="b6s"]
+size = Vector3(3, 0.2, 5)
+
+[sub_resource type="StandardMaterial3D" id="b6c"]
+albedo_color = Color(0.5, 0.52, 0.55, 1)
+
+[sub_resource type="BoxMesh" id="b6m"]
+size = Vector3(3, 0.2, 5)
+
+[sub_resource type="BoxShape3D" id="b7s"]
+size = Vector3(3, 1.3, 1.6)
+
+[sub_resource type="StandardMaterial3D" id="b7c"]
+albedo_color = Color(0.43, 0.46, 0.49, 1)
+
+[sub_resource type="BoxMesh" id="b7m"]
+size = Vector3(3, 1.3, 1.6)
+
+[sub_resource type="BoxShape3D" id="b8s"]
+size = Vector3(2.6, 0.24, 0.65)
+
+[sub_resource type="StandardMaterial3D" id="b8c"]
+albedo_color = Color(0.43, 0.46, 0.49, 1)
+
+[sub_resource type="BoxMesh" id="b8m"]
+size = Vector3(2.6, 0.24, 0.65)
+
+[sub_resource type="BoxShape3D" id="b9s"]
+size = Vector3(2.6, 0.48, 0.65)
+
+[sub_resource type="StandardMaterial3D" id="b9c"]
+albedo_color = Color(0.43, 0.46, 0.49, 1)
+
+[sub_resource type="BoxMesh" id="b9m"]
+size = Vector3(2.6, 0.48, 0.65)
+
+[sub_resource type="BoxShape3D" id="b10s"]
+size = Vector3(2.6, 0.72, 0.65)
+
+[sub_resource type="StandardMaterial3D" id="b10c"]
+albedo_color = Color(0.43, 0.46, 0.49, 1)
+
+[sub_resource type="BoxMesh" id="b10m"]
+size = Vector3(2.6, 0.72, 0.65)
+
+[sub_resource type="BoxShape3D" id="b11s"]
+size = Vector3(2.6, 0.96, 0.65)
+
+[sub_resource type="StandardMaterial3D" id="b11c"]
+albedo_color = Color(0.43, 0.46, 0.49, 1)
+
+[sub_resource type="BoxMesh" id="b11m"]
+size = Vector3(2.6, 0.96, 0.65)
+
+[sub_resource type="BoxShape3D" id="b12s"]
+size = Vector3(2.6, 1.2, 0.65)
+
+[sub_resource type="StandardMaterial3D" id="b12c"]
+albedo_color = Color(0.43, 0.46, 0.49, 1)
+
+[sub_resource type="BoxMesh" id="b12m"]
+size = Vector3(2.6, 1.2, 0.65)
+
+[sub_resource type="BoxShape3D" id="b13s"]
+size = Vector3(2.6, 1.2, 1)
+
+[sub_resource type="StandardMaterial3D" id="b13c"]
+albedo_color = Color(0.43, 0.46, 0.49, 1)
+
+[sub_resource type="BoxMesh" id="b13m"]
+size = Vector3(2.6, 1.2, 1)
+
+[sub_resource type="BoxShape3D" id="b14s"]
+size = Vector3(3, 0.4, 5)
+
+[sub_resource type="StandardMaterial3D" id="b14c"]
+albedo_color = Color(0.56, 0.54, 0.46, 1)
+
+[sub_resource type="BoxMesh" id="b14m"]
+size = Vector3(3, 0.4, 5)
+
+[sub_resource type="BoxShape3D" id="b15s"]
+size = Vector3(0.3, 1.5, 5)
+
+[sub_resource type="StandardMaterial3D" id="b15c"]
+albedo_color = Color(0.43, 0.46, 0.49, 1)
+
+[sub_resource type="BoxMesh" id="b15m"]
+size = Vector3(0.3, 1.5, 5)
+
+[sub_resource type="BoxShape3D" id="b16s"]
+size = Vector3(0.3, 1.5, 5)
+
+[sub_resource type="StandardMaterial3D" id="b16c"]
+albedo_color = Color(0.43, 0.46, 0.49, 1)
+
+[sub_resource type="BoxMesh" id="b16m"]
+size = Vector3(0.3, 1.5, 5)
+
+[sub_resource type="BoxShape3D" id="b17s"]
+size = Vector3(0.3, 3.2, 8)
+
+[sub_resource type="StandardMaterial3D" id="b17c"]
+albedo_color = Color(0.43, 0.46, 0.49, 1)
+
+[sub_resource type="BoxMesh" id="b17m"]
+size = Vector3(0.3, 3.2, 8)
+
+[sub_resource type="BoxShape3D" id="b18s"]
+size = Vector3(0.3, 3.2, 8)
+
+[sub_resource type="StandardMaterial3D" id="b18c"]
+albedo_color = Color(0.43, 0.46, 0.49, 1)
+
+[sub_resource type="BoxMesh" id="b18m"]
+size = Vector3(0.3, 3.2, 8)
+
+[sub_resource type="BoxShape3D" id="b19s"]
+size = Vector3(2, 3, 2)
+
+[sub_resource type="StandardMaterial3D" id="b19c"]
+albedo_color = Color(0.43, 0.46, 0.49, 1)
+
+[sub_resource type="BoxMesh" id="b19m"]
+size = Vector3(2, 3, 2)
+
+[sub_resource type="BoxShape3D" id="i0s"]
+size = Vector3(0.7, 1.5, 0.7)
+
+[sub_resource type="StandardMaterial3D" id="i0c"]
+albedo_color = Color(0.35, 0.4, 0.45, 1)
+
+[sub_resource type="BoxMesh" id="i0m"]
+size = Vector3(0.6, 1.5, 0.6)
+
+[sub_resource type="BoxShape3D" id="i1s"]
+size = Vector3(0.7, 1.5, 0.7)
+
+[sub_resource type="StandardMaterial3D" id="i1c"]
+albedo_color = Color(0.65, 0.3, 0.28, 1)
+
+[sub_resource type="BoxMesh" id="i1m"]
+size = Vector3(0.6, 1.5, 0.6)
+
+[sub_resource type="BoxShape3D" id="i2s"]
+size = Vector3(0.7, 1.5, 0.7)
+
+[sub_resource type="StandardMaterial3D" id="i2c"]
+albedo_color = Color(0.3, 0.6, 0.45, 1)
+
+[sub_resource type="BoxMesh" id="i2m"]
+size = Vector3(0.6, 1.5, 0.6)
+
 [sub_resource type="Environment" id="environment"]
 background_mode = 1
-background_color = Color(0.16,0.19,0.23,1)
+background_color = Color(0.16, 0.19, 0.23, 1)
 ambient_light_source = 3
-ambient_light_color = Color(0.8,0.85,1,1)
+ambient_light_color = Color(0.8, 0.85, 1, 1)
 ambient_light_energy = 0.7
-[sub_resource type="BoxShape3D" id="b1s"]
-size = Vector3(30,0.5,30)
-[sub_resource type="BoxMesh" id="b1m"]
-size = Vector3(30,0.5,30)
-[sub_resource type="StandardMaterial3D" id="b1c"]
-albedo_color = Color(0.27,0.29,0.32,1)
-[sub_resource type="BoxShape3D" id="b2s"]
-size = Vector3(30,1,0.3)
-[sub_resource type="BoxMesh" id="b2m"]
-size = Vector3(30,1,0.3)
-[sub_resource type="StandardMaterial3D" id="b2c"]
-albedo_color = Color(0.43,0.46,0.49,1)
-[sub_resource type="BoxShape3D" id="b3s"]
-size = Vector3(30,1,0.3)
-[sub_resource type="BoxMesh" id="b3m"]
-size = Vector3(30,1,0.3)
-[sub_resource type="StandardMaterial3D" id="b3c"]
-albedo_color = Color(0.43,0.46,0.49,1)
-[sub_resource type="BoxShape3D" id="b4s"]
-size = Vector3(0.3,1,30)
-[sub_resource type="BoxMesh" id="b4m"]
-size = Vector3(0.3,1,30)
-[sub_resource type="StandardMaterial3D" id="b4c"]
-albedo_color = Color(0.43,0.46,0.49,1)
-[sub_resource type="BoxShape3D" id="b5s"]
-size = Vector3(0.3,1,30)
-[sub_resource type="BoxMesh" id="b5m"]
-size = Vector3(0.3,1,30)
-[sub_resource type="StandardMaterial3D" id="b5c"]
-albedo_color = Color(0.43,0.46,0.49,1)
-[sub_resource type="BoxShape3D" id="b6s"]
-size = Vector3(3,0.2,5)
-[sub_resource type="BoxMesh" id="b6m"]
-size = Vector3(3,0.2,5)
-[sub_resource type="StandardMaterial3D" id="b6c"]
-albedo_color = Color(0.5,0.52,0.55,1)
-[sub_resource type="BoxShape3D" id="b7s"]
-size = Vector3(3,1.3,1.6)
-[sub_resource type="BoxMesh" id="b7m"]
-size = Vector3(3,1.3,1.6)
-[sub_resource type="StandardMaterial3D" id="b7c"]
-albedo_color = Color(0.43,0.46,0.49,1)
-[sub_resource type="BoxShape3D" id="b8s"]
-size = Vector3(2.6,0.24,0.65)
-[sub_resource type="BoxMesh" id="b8m"]
-size = Vector3(2.6,0.24,0.65)
-[sub_resource type="StandardMaterial3D" id="b8c"]
-albedo_color = Color(0.43,0.46,0.49,1)
-[sub_resource type="BoxShape3D" id="b9s"]
-size = Vector3(2.6,0.48,0.65)
-[sub_resource type="BoxMesh" id="b9m"]
-size = Vector3(2.6,0.48,0.65)
-[sub_resource type="StandardMaterial3D" id="b9c"]
-albedo_color = Color(0.43,0.46,0.49,1)
-[sub_resource type="BoxShape3D" id="b10s"]
-size = Vector3(2.6,0.72,0.65)
-[sub_resource type="BoxMesh" id="b10m"]
-size = Vector3(2.6,0.72,0.65)
-[sub_resource type="StandardMaterial3D" id="b10c"]
-albedo_color = Color(0.43,0.46,0.49,1)
-[sub_resource type="BoxShape3D" id="b11s"]
-size = Vector3(2.6,0.96,0.65)
-[sub_resource type="BoxMesh" id="b11m"]
-size = Vector3(2.6,0.96,0.65)
-[sub_resource type="StandardMaterial3D" id="b11c"]
-albedo_color = Color(0.43,0.46,0.49,1)
-[sub_resource type="BoxShape3D" id="b12s"]
-size = Vector3(2.6,1.2,0.65)
-[sub_resource type="BoxMesh" id="b12m"]
-size = Vector3(2.6,1.2,0.65)
-[sub_resource type="StandardMaterial3D" id="b12c"]
-albedo_color = Color(0.43,0.46,0.49,1)
-[sub_resource type="BoxShape3D" id="b13s"]
-size = Vector3(2.6,1.2,1)
-[sub_resource type="BoxMesh" id="b13m"]
-size = Vector3(2.6,1.2,1)
-[sub_resource type="StandardMaterial3D" id="b13c"]
-albedo_color = Color(0.43,0.46,0.49,1)
-[sub_resource type="BoxShape3D" id="b14s"]
-size = Vector3(3,0.4,5)
-[sub_resource type="BoxMesh" id="b14m"]
-size = Vector3(3,0.4,5)
-[sub_resource type="StandardMaterial3D" id="b14c"]
-albedo_color = Color(0.56,0.54,0.46,1)
-[sub_resource type="BoxShape3D" id="b15s"]
-size = Vector3(0.3,1.5,5)
-[sub_resource type="BoxMesh" id="b15m"]
-size = Vector3(0.3,1.5,5)
-[sub_resource type="StandardMaterial3D" id="b15c"]
-albedo_color = Color(0.43,0.46,0.49,1)
-[sub_resource type="BoxShape3D" id="b16s"]
-size = Vector3(0.3,1.5,5)
-[sub_resource type="BoxMesh" id="b16m"]
-size = Vector3(0.3,1.5,5)
-[sub_resource type="StandardMaterial3D" id="b16c"]
-albedo_color = Color(0.43,0.46,0.49,1)
-[sub_resource type="BoxShape3D" id="b17s"]
-size = Vector3(0.3,3.2,8)
-[sub_resource type="BoxMesh" id="b17m"]
-size = Vector3(0.3,3.2,8)
-[sub_resource type="StandardMaterial3D" id="b17c"]
-albedo_color = Color(0.43,0.46,0.49,1)
-[sub_resource type="BoxShape3D" id="b18s"]
-size = Vector3(0.3,3.2,8)
-[sub_resource type="BoxMesh" id="b18m"]
-size = Vector3(0.3,3.2,8)
-[sub_resource type="StandardMaterial3D" id="b18c"]
-albedo_color = Color(0.43,0.46,0.49,1)
-[sub_resource type="BoxShape3D" id="b19s"]
-size = Vector3(2,3,2)
-[sub_resource type="BoxMesh" id="b19m"]
-size = Vector3(2,3,2)
-[sub_resource type="StandardMaterial3D" id="b19c"]
-albedo_color = Color(0.43,0.46,0.49,1)
-[sub_resource type="BoxShape3D" id="i0s"]
-size = Vector3(0.7,1.5,0.7)
-[sub_resource type="BoxMesh" id="i0m"]
-size = Vector3(0.6,1.5,0.6)
-[sub_resource type="StandardMaterial3D" id="i0c"]
-albedo_color = Color(0.35,0.4,0.45,1)
-[sub_resource type="BoxShape3D" id="i1s"]
-size = Vector3(0.7,1.5,0.7)
-[sub_resource type="BoxMesh" id="i1m"]
-size = Vector3(0.6,1.5,0.6)
-[sub_resource type="StandardMaterial3D" id="i1c"]
-albedo_color = Color(0.65,0.3,0.28,1)
-[sub_resource type="BoxShape3D" id="i2s"]
-size = Vector3(0.7,1.5,0.7)
-[sub_resource type="BoxMesh" id="i2m"]
-size = Vector3(0.6,1.5,0.6)
-[sub_resource type="StandardMaterial3D" id="i2c"]
-albedo_color = Color(0.3,0.6,0.45,1)
-[node name="TestWorld" type="Node3D" node_paths=PackedStringArray("player", "cameras")]
+
+[node name="TestWorld" type="Node3D" unique_id=86126591 node_paths=PackedStringArray("player", "cameras")]
 script = ExtResource("world")
 player = NodePath("Player")
 cameras = NodePath("CameraSystem")
-[node name="Geometry" type="Node3D" parent="."]
-[node name="Floor" type="StaticBody3D" parent="Geometry"]
-position = Vector3(0,-0.25,0)
-[node name="Collision" type="CollisionShape3D" parent="Geometry/Floor"]
+
+[node name="Geometry" type="Node3D" parent="." unique_id=1032168028]
+
+[node name="Floor" type="StaticBody3D" parent="Geometry" unique_id=1187227149]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Floor" unique_id=2106768903]
 shape = SubResource("b1s")
-[node name="Mesh" type="MeshInstance3D" parent="Geometry/Floor"]
-mesh = SubResource("b1m")
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Floor" unique_id=1818293378]
 material_override = SubResource("b1c")
-[node name="BoundaryNorth" type="StaticBody3D" parent="Geometry"]
-position = Vector3(0,0.5,-15)
-[node name="Collision" type="CollisionShape3D" parent="Geometry/BoundaryNorth"]
+mesh = SubResource("b1m")
+
+[node name="BoundaryNorth" type="StaticBody3D" parent="Geometry" unique_id=544389171 groups=["camera_occluder"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -15)
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/BoundaryNorth" unique_id=315404877]
 shape = SubResource("b2s")
-[node name="Mesh" type="MeshInstance3D" parent="Geometry/BoundaryNorth"]
-mesh = SubResource("b2m")
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/BoundaryNorth" unique_id=489175293]
 material_override = SubResource("b2c")
-[node name="BoundarySouth" type="StaticBody3D" parent="Geometry"]
-position = Vector3(0,0.5,15)
-[node name="Collision" type="CollisionShape3D" parent="Geometry/BoundarySouth"]
+mesh = SubResource("b2m")
+
+[node name="BoundarySouth" type="StaticBody3D" parent="Geometry" unique_id=320699129 groups=["camera_occluder"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 15)
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/BoundarySouth" unique_id=1334871445]
 shape = SubResource("b3s")
-[node name="Mesh" type="MeshInstance3D" parent="Geometry/BoundarySouth"]
-mesh = SubResource("b3m")
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/BoundarySouth" unique_id=983690504]
 material_override = SubResource("b3c")
-[node name="BoundaryWest" type="StaticBody3D" parent="Geometry"]
-position = Vector3(-15,0.5,0)
-[node name="Collision" type="CollisionShape3D" parent="Geometry/BoundaryWest"]
+mesh = SubResource("b3m")
+
+[node name="BoundaryWest" type="StaticBody3D" parent="Geometry" unique_id=175864156 groups=["camera_occluder"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0.5, 0)
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/BoundaryWest" unique_id=419105337]
 shape = SubResource("b4s")
-[node name="Mesh" type="MeshInstance3D" parent="Geometry/BoundaryWest"]
-mesh = SubResource("b4m")
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/BoundaryWest" unique_id=71070304]
 material_override = SubResource("b4c")
-[node name="BoundaryEast" type="StaticBody3D" parent="Geometry"]
-position = Vector3(15,0.5,0)
-[node name="Collision" type="CollisionShape3D" parent="Geometry/BoundaryEast"]
+mesh = SubResource("b4m")
+
+[node name="BoundaryEast" type="StaticBody3D" parent="Geometry" unique_id=761717061 groups=["camera_occluder"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0.5, 0)
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/BoundaryEast" unique_id=54083637]
 shape = SubResource("b5s")
-[node name="Mesh" type="MeshInstance3D" parent="Geometry/BoundaryEast"]
-mesh = SubResource("b5m")
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/BoundaryEast" unique_id=1014404689]
 material_override = SubResource("b5c")
-[node name="Ramp" type="StaticBody3D" parent="Geometry"]
-position = Vector3(-7,0.58,-3)
-rotation_degrees = Vector3(15,0,0)
-[node name="Collision" type="CollisionShape3D" parent="Geometry/Ramp"]
+mesh = SubResource("b5m")
+
+[node name="Ramp" type="StaticBody3D" parent="Geometry" unique_id=779596674]
+transform = Transform3D(1, 0, 0, 0, 0.9659258, -0.25881904, 0, 0.25881904, 0.9659258, -7, 0.58, -3)
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Ramp" unique_id=1496501623]
 shape = SubResource("b6s")
-[node name="Mesh" type="MeshInstance3D" parent="Geometry/Ramp"]
-mesh = SubResource("b6m")
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Ramp" unique_id=1716097293]
 material_override = SubResource("b6c")
-[node name="RampLanding" type="StaticBody3D" parent="Geometry"]
-position = Vector3(-7,0.65,-6.3)
-[node name="Collision" type="CollisionShape3D" parent="Geometry/RampLanding"]
+mesh = SubResource("b6m")
+
+[node name="RampLanding" type="StaticBody3D" parent="Geometry" unique_id=1499564941]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.65, -6.3)
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/RampLanding" unique_id=1987481008]
 shape = SubResource("b7s")
-[node name="Mesh" type="MeshInstance3D" parent="Geometry/RampLanding"]
-mesh = SubResource("b7m")
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/RampLanding" unique_id=762620211]
 material_override = SubResource("b7c")
-[node name="RampSign" type="Label3D" parent="Geometry"]
-position = Vector3(-7,2.7,-5)
+mesh = SubResource("b7m")
+
+[node name="RampSign" type="Label3D" parent="Geometry" unique_id=1095235445]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2.7, -5)
+pixel_size = 0.01
+billboard = 1
 text = "RAMPA 15 graus"
 font_size = 44
+
+[node name="Step1" type="StaticBody3D" parent="Geometry" unique_id=2054590638]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.12, -1)
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Step1" unique_id=1402393142]
+shape = SubResource("b8s")
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Step1" unique_id=1142055085]
+material_override = SubResource("b8c")
+mesh = SubResource("b8m")
+
+[node name="Step2" type="StaticBody3D" parent="Geometry" unique_id=601555772]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.24, -1.65)
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Step2" unique_id=1496599026]
+shape = SubResource("b9s")
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Step2" unique_id=275575846]
+material_override = SubResource("b9c")
+mesh = SubResource("b9m")
+
+[node name="Step3" type="StaticBody3D" parent="Geometry" unique_id=579413989]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.36, -2.3)
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Step3" unique_id=533617237]
+shape = SubResource("b10s")
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Step3" unique_id=1139361802]
+material_override = SubResource("b10c")
+mesh = SubResource("b10m")
+
+[node name="Step4" type="StaticBody3D" parent="Geometry" unique_id=742739491]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.48, -2.95)
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Step4" unique_id=1517356939]
+shape = SubResource("b11s")
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Step4" unique_id=1466483207]
+material_override = SubResource("b11c")
+mesh = SubResource("b11m")
+
+[node name="Step5" type="StaticBody3D" parent="Geometry" unique_id=936224257]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.6, -3.6)
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Step5" unique_id=864970414]
+shape = SubResource("b12s")
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Step5" unique_id=171875793]
+material_override = SubResource("b12c")
+mesh = SubResource("b12m")
+
+[node name="StepLanding" type="StaticBody3D" parent="Geometry" unique_id=338833108]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.6, -4.4)
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/StepLanding" unique_id=1980487219]
+shape = SubResource("b13s")
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/StepLanding" unique_id=575659581]
+material_override = SubResource("b13c")
+mesh = SubResource("b13m")
+
+[node name="StepsSign" type="Label3D" parent="Geometry" unique_id=659170823]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, -4.4)
 pixel_size = 0.01
 billboard = 1
-no_depth_test = false
-[node name="Step1" type="StaticBody3D" parent="Geometry"]
-position = Vector3(-2,0.12,-1)
-[node name="Collision" type="CollisionShape3D" parent="Geometry/Step1"]
-shape = SubResource("b8s")
-[node name="Mesh" type="MeshInstance3D" parent="Geometry/Step1"]
-mesh = SubResource("b8m")
-material_override = SubResource("b8c")
-[node name="Step2" type="StaticBody3D" parent="Geometry"]
-position = Vector3(-2,0.24,-1.65)
-[node name="Collision" type="CollisionShape3D" parent="Geometry/Step2"]
-shape = SubResource("b9s")
-[node name="Mesh" type="MeshInstance3D" parent="Geometry/Step2"]
-mesh = SubResource("b9m")
-material_override = SubResource("b9c")
-[node name="Step3" type="StaticBody3D" parent="Geometry"]
-position = Vector3(-2,0.36,-2.3)
-[node name="Collision" type="CollisionShape3D" parent="Geometry/Step3"]
-shape = SubResource("b10s")
-[node name="Mesh" type="MeshInstance3D" parent="Geometry/Step3"]
-mesh = SubResource("b10m")
-material_override = SubResource("b10c")
-[node name="Step4" type="StaticBody3D" parent="Geometry"]
-position = Vector3(-2,0.48,-2.95)
-[node name="Collision" type="CollisionShape3D" parent="Geometry/Step4"]
-shape = SubResource("b11s")
-[node name="Mesh" type="MeshInstance3D" parent="Geometry/Step4"]
-mesh = SubResource("b11m")
-material_override = SubResource("b11c")
-[node name="Step5" type="StaticBody3D" parent="Geometry"]
-position = Vector3(-2,0.6,-3.6)
-[node name="Collision" type="CollisionShape3D" parent="Geometry/Step5"]
-shape = SubResource("b12s")
-[node name="Mesh" type="MeshInstance3D" parent="Geometry/Step5"]
-mesh = SubResource("b12m")
-material_override = SubResource("b12c")
-[node name="StepLanding" type="StaticBody3D" parent="Geometry"]
-position = Vector3(-2,0.6,-4.4)
-[node name="Collision" type="CollisionShape3D" parent="Geometry/StepLanding"]
-shape = SubResource("b13s")
-[node name="Mesh" type="MeshInstance3D" parent="Geometry/StepLanding"]
-mesh = SubResource("b13m")
-material_override = SubResource("b13c")
-[node name="StepsSign" type="Label3D" parent="Geometry"]
-position = Vector3(-2,2.5,-4.4)
 text = "DEGRAUS 24 cm"
 font_size = 44
+
+[node name="LowRoof" type="StaticBody3D" parent="Geometry" unique_id=777900280 groups=["camera_occluder"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.5, -3)
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/LowRoof" unique_id=1950347855]
+shape = SubResource("b14s")
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/LowRoof" unique_id=1779079595]
+material_override = SubResource("b14c")
+mesh = SubResource("b14m")
+
+[node name="LowWallLeft" type="StaticBody3D" parent="Geometry" unique_id=391856492 groups=["camera_occluder"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.35, 0.75, -3)
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/LowWallLeft" unique_id=2018626037]
+shape = SubResource("b15s")
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/LowWallLeft" unique_id=1178056527]
+material_override = SubResource("b15c")
+mesh = SubResource("b15m")
+
+[node name="LowWallRight" type="StaticBody3D" parent="Geometry" unique_id=1849347183 groups=["camera_occluder"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.65, 0.75, -3)
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/LowWallRight" unique_id=1466769565]
+shape = SubResource("b16s")
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/LowWallRight" unique_id=314772005]
+material_override = SubResource("b16c")
+mesh = SubResource("b16m")
+
+[node name="CrouchSign" type="Label3D" parent="Geometry" unique_id=167292375]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2.6, -0.5)
 pixel_size = 0.01
 billboard = 1
-no_depth_test = false
-[node name="LowRoof" type="StaticBody3D" parent="Geometry"]
-position = Vector3(4,1.5,-3)
-[node name="Collision" type="CollisionShape3D" parent="Geometry/LowRoof"]
-shape = SubResource("b14s")
-[node name="Mesh" type="MeshInstance3D" parent="Geometry/LowRoof"]
-mesh = SubResource("b14m")
-material_override = SubResource("b14c")
-[node name="LowWallLeft" type="StaticBody3D" parent="Geometry"]
-position = Vector3(2.35,0.75,-3)
-[node name="Collision" type="CollisionShape3D" parent="Geometry/LowWallLeft"]
-shape = SubResource("b15s")
-[node name="Mesh" type="MeshInstance3D" parent="Geometry/LowWallLeft"]
-mesh = SubResource("b15m")
-material_override = SubResource("b15c")
-[node name="LowWallRight" type="StaticBody3D" parent="Geometry"]
-position = Vector3(5.65,0.75,-3)
-[node name="Collision" type="CollisionShape3D" parent="Geometry/LowWallRight"]
-shape = SubResource("b16s")
-[node name="Mesh" type="MeshInstance3D" parent="Geometry/LowWallRight"]
-mesh = SubResource("b16m")
-material_override = SubResource("b16c")
-[node name="CrouchSign" type="Label3D" parent="Geometry"]
-position = Vector3(4,2.6,-0.5)
 text = "TETO 1.30 m / segure C"
 font_size = 44
+
+[node name="CorridorLeft" type="StaticBody3D" parent="Geometry" unique_id=539355428 groups=["camera_occluder"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1.6, 4)
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/CorridorLeft" unique_id=1866702408]
+shape = SubResource("b17s")
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/CorridorLeft" unique_id=1524358200]
+material_override = SubResource("b17c")
+mesh = SubResource("b17m")
+
+[node name="CorridorRight" type="StaticBody3D" parent="Geometry" unique_id=1386173276 groups=["camera_occluder"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 1.6, 4)
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/CorridorRight" unique_id=484386204]
+shape = SubResource("b18s")
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/CorridorRight" unique_id=873299973]
+material_override = SubResource("b18c")
+mesh = SubResource("b18m")
+
+[node name="CorridorSign" type="Label3D" parent="Geometry" unique_id=1832877019]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 3.5, 0)
 pixel_size = 0.01
 billboard = 1
-no_depth_test = false
-[node name="CorridorLeft" type="StaticBody3D" parent="Geometry"]
-position = Vector3(8,1.6,4)
-[node name="Collision" type="CollisionShape3D" parent="Geometry/CorridorLeft"]
-shape = SubResource("b17s")
-[node name="Mesh" type="MeshInstance3D" parent="Geometry/CorridorLeft"]
-mesh = SubResource("b17m")
-material_override = SubResource("b17c")
-[node name="CorridorRight" type="StaticBody3D" parent="Geometry"]
-position = Vector3(11,1.6,4)
-[node name="Collision" type="CollisionShape3D" parent="Geometry/CorridorRight"]
-shape = SubResource("b18s")
-[node name="Mesh" type="MeshInstance3D" parent="Geometry/CorridorRight"]
-mesh = SubResource("b18m")
-material_override = SubResource("b18c")
-[node name="CorridorSign" type="Label3D" parent="Geometry"]
-position = Vector3(9.5,3.5,0)
 text = "CORREDOR / CAMERA"
 font_size = 44
+
+[node name="CameraObstacle" type="StaticBody3D" parent="Geometry" unique_id=736743444 groups=["camera_occluder"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1.5, 6)
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/CameraObstacle" unique_id=79508414]
+shape = SubResource("b19s")
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/CameraObstacle" unique_id=535280589]
+material_override = SubResource("b19c")
+mesh = SubResource("b19m")
+
+[node name="CameraSign" type="Label3D" parent="Geometry" unique_id=223159026]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 3.7, 6)
 pixel_size = 0.01
 billboard = 1
-no_depth_test = false
-[node name="CameraObstacle" type="StaticBody3D" parent="Geometry"]
-position = Vector3(-6,1.5,6)
-[node name="Collision" type="CollisionShape3D" parent="Geometry/CameraObstacle"]
-shape = SubResource("b19s")
-[node name="Mesh" type="MeshInstance3D" parent="Geometry/CameraObstacle"]
-mesh = SubResource("b19m")
-material_override = SubResource("b19c")
-[node name="CameraSign" type="Label3D" parent="Geometry"]
-position = Vector3(-6,3.7,6)
 text = "OBSTACULO CAMERA"
 font_size = 44
-pixel_size = 0.01
-billboard = 1
-no_depth_test = false
-[node name="InteractionTest" type="Area3D" parent="." node_paths=PackedStringArray("indicator")]
-position = Vector3(-3,0.75,2)
+
+[node name="InteractionTest" type="Area3D" parent="." unique_id=1669758414 node_paths=PackedStringArray("indicator")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.75, 2)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("interaction")
-effect = 0
-prompt = "Ativar terminal"
 indicator = NodePath("Mesh")
-[node name="Collision" type="CollisionShape3D" parent="InteractionTest"]
+prompt = "Ativar terminal"
+
+[node name="Collision" type="CollisionShape3D" parent="InteractionTest" unique_id=1942179893]
 shape = SubResource("i0s")
-[node name="Mesh" type="MeshInstance3D" parent="InteractionTest"]
-mesh = SubResource("i0m")
+
+[node name="Mesh" type="MeshInstance3D" parent="InteractionTest" unique_id=493295172]
 material_override = SubResource("i0c")
-[node name="Label" type="Label3D" parent="InteractionTest"]
-position = Vector3(0,1.1,0)
-text = "TERMINAL"
+mesh = SubResource("i0m")
+
+[node name="Label" type="Label3D" parent="InteractionTest" unique_id=818381470]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
 billboard = 1
+text = "TERMINAL"
 font_size = 36
-[node name="DamageTest" type="Area3D" parent="." node_paths=PackedStringArray("indicator")]
-position = Vector3(0,0.75,0)
+
+[node name="DamageTest" type="Area3D" parent="." unique_id=1932667373 node_paths=PackedStringArray("indicator")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("interaction")
 effect = 1
-prompt = "Receber 30 de dano"
 indicator = NodePath("Mesh")
-[node name="Collision" type="CollisionShape3D" parent="DamageTest"]
+prompt = "Receber 30 de dano"
+
+[node name="Collision" type="CollisionShape3D" parent="DamageTest" unique_id=1741358314]
 shape = SubResource("i1s")
-[node name="Mesh" type="MeshInstance3D" parent="DamageTest"]
-mesh = SubResource("i1m")
+
+[node name="Mesh" type="MeshInstance3D" parent="DamageTest" unique_id=402338491]
 material_override = SubResource("i1c")
-[node name="Label" type="Label3D" parent="DamageTest"]
-position = Vector3(0,1.1,0)
-text = "DANO"
+mesh = SubResource("i1m")
+
+[node name="Label" type="Label3D" parent="DamageTest" unique_id=566881620]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
 billboard = 1
+text = "DANO"
 font_size = 36
-[node name="HealTest" type="Area3D" parent="." node_paths=PackedStringArray("indicator")]
-position = Vector3(3,0.75,2)
+
+[node name="HealTest" type="Area3D" parent="." unique_id=1540562645 node_paths=PackedStringArray("indicator")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.75, 2)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("interaction")
 effect = 2
-prompt = "Recuperar 30 de vida"
 indicator = NodePath("Mesh")
-[node name="Collision" type="CollisionShape3D" parent="HealTest"]
+prompt = "Recuperar 30 de vida"
+
+[node name="Collision" type="CollisionShape3D" parent="HealTest" unique_id=6942204]
 shape = SubResource("i2s")
-[node name="Mesh" type="MeshInstance3D" parent="HealTest"]
-mesh = SubResource("i2m")
+
+[node name="Mesh" type="MeshInstance3D" parent="HealTest" unique_id=1135439343]
 material_override = SubResource("i2c")
-[node name="Label" type="Label3D" parent="HealTest"]
-position = Vector3(0,1.1,0)
-text = "CURA"
+mesh = SubResource("i2m")
+
+[node name="Label" type="Label3D" parent="HealTest" unique_id=733261833]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
 billboard = 1
+text = "CURA"
 font_size = 36
-[node name="Player" parent="." instance=ExtResource("player")]
-position = Vector3(0,0.02,5)
-[node name="CameraSystem" parent="." node_paths=PackedStringArray("target") instance=ExtResource("camera")]
+
+[node name="Player" parent="." unique_id=2092073191 instance=ExtResource("player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 5)
+
+[node name="CameraSystem" parent="." unique_id=9342621 node_paths=PackedStringArray("target") instance=ExtResource("camera")]
 target = NodePath("../Player")
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=519514432]
 environment = SubResource("environment")
-[node name="Sun" type="DirectionalLight3D" parent="."]
-rotation_degrees = Vector3(-55,-25,0)
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=1025046791]
+transform = Transform3D(0.90630776, 0.34618863, -0.24240388, 0, 0.57357645, 0.81915206, 0.42261827, -0.74240386, 0.5198368, 0, 0, 0)
 light_energy = 1.1
 shadow_enabled = true
-[node name="DebugHUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("player", "cameras", "label", "prompt_label")]
+
+[node name="DebugHUD" type="CanvasLayer" parent="." unique_id=1513931810 node_paths=PackedStringArray("player", "cameras", "label", "prompt_label")]
 script = ExtResource("hud")
 player = NodePath("../Player")
 cameras = NodePath("../CameraSystem")
 label = NodePath("Panel/Status")
 prompt_label = NodePath("Prompt")
-[node name="Panel" type="PanelContainer" parent="DebugHUD"]
+
+[node name="Panel" type="PanelContainer" parent="DebugHUD" unique_id=107689849]
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 540.0
 offset_bottom = 245.0
 mouse_filter = 2
-[node name="Status" type="Label" parent="DebugHUD/Panel"]
+
+[node name="Status" type="Label" parent="DebugHUD/Panel" unique_id=525807964]
 layout_mode = 2
 theme_override_font_sizes/font_size = 17
-[node name="Prompt" type="Label" parent="DebugHUD"]
+
+[node name="Prompt" type="Label" parent="DebugHUD" unique_id=847889178]
 offset_left = 340.0
 offset_top = 640.0
 offset_right = 940.0
 offset_bottom = 690.0
-horizontal_alignment = 1
 theme_override_font_sizes/font_size = 25
+horizontal_alignment = 1

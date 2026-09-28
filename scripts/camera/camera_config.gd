@@ -16,3 +16,14 @@ extends Resource
 @export var iso_height: float = 0.9
 @export var iso_zoom: float = 17.0
 @export var iso_orthographic: bool = true
+
+@export_group("Isometric visibility")
+@export var occlusion_enabled: bool = true
+@export var highlight_enabled: bool = true
+@export_range(0.05, 0.6) var occlusion_radius: float = 0.32
+@export_range(0.0, 1.0) var obstacle_opacity: float = 0.28
+@export_range(0.01, 1.0) var fade_out_time: float = 0.18
+@export_range(0.01, 1.0) var restore_time: float = 0.24
+@export_range(0.0, 1.0) var highlight_intensity: float = 0.28
+@export_range(0.02, 0.2) var occlusion_interval: float = 0.05
+@export_range(0.05, 0.5) var occlusion_hold: float = 0.12

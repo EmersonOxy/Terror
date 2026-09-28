@@ -34,7 +34,10 @@ func tick(delta: float, direction: Vector3, wants_crouch: bool, wants_sprint: bo
 	var speed := config.crouch_speed if crouched else (config.sprint_speed if sprinting else config.walk_speed)
 	var target := direction * speed
 	var rate := config.acceleration if direction.length_squared() > 0.01 else config.deceleration
-	var horizontal := Vector3(body.velocity.x, 0.0, body.velocity.z).move_toward(target, rate * delta)
+	var horizontal := Vector3(body.velocity.x, 0.0, body.velocity.z)
+	if horizontal.dot(target) < 0.0:
+		rate = config.deceleration
+	horizontal = horizontal.move_toward(target, rate * delta)
 	if not alive:
 		horizontal = Vector3.ZERO
 	body.velocity.x = horizontal.x
