@@ -9,6 +9,7 @@ signal mode_changed(mode_name: String)
 @export var third: Camera3D
 @export var iso: Camera3D
 @export var occlusion: IsometricOcclusion
+var controls_locked: bool = false
 var mode: String = "Terceira pessoa"
 var yaw: float = 0.0
 var pitch: float = -0.22
@@ -38,6 +39,8 @@ func set_mode(isometric: bool) -> void:
 	mode_changed.emit(mode)
 
 func _unhandled_input(event: InputEvent) -> void:
+	if controls_locked:
+		return
 	if event.is_action_pressed("camera_third_person"):
 		set_mode(false)
 	elif event.is_action_pressed("camera_isometric"):

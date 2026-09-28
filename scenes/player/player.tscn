@@ -1,14 +1,17 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=11 format=3]
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1"]
 [ext_resource type="Resource" path="res://resources/player/default.tres" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/player/placeholder.tscn" id="3"]
 [ext_resource type="Script" path="res://scripts/components/movement_component.gd" id="4"]
 [ext_resource type="Script" path="res://scripts/components/status_component.gd" id="5"]
 [ext_resource type="Script" path="res://scripts/components/interaction_component.gd" id="6"]
+[ext_resource type="Script" path="res://scripts/components/inventory_component.gd" id="inventory"]
+[ext_resource type="Script" path="res://scripts/components/equipment_component.gd" id="equipment"]
+[ext_resource type="Script" path="res://scripts/items/item_actions.gd" id="actions"]
 [sub_resource type="CapsuleShape3D" id="shape"]
 radius = 0.3
 height = 1.8
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("collider", "visual", "movement", "status", "interaction")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("collider", "visual", "movement", "status", "interaction", "inventory", "equipment", "items")]
 collision_layer = 2
 collision_mask = 1
 script = ExtResource("1")
@@ -18,6 +21,9 @@ visual = NodePath("Visual")
 movement = NodePath("MovementComponent")
 status = NodePath("StatusComponent")
 interaction = NodePath("InteractionComponent")
+inventory = NodePath("InventoryComponent")
+equipment = NodePath("EquipmentComponent")
+items = NodePath("ItemActions")
 [node name="Collision" type="CollisionShape3D" parent="."]
 position = Vector3(0, 0.9, 0)
 shape = SubResource("shape")
@@ -28,3 +34,14 @@ script = ExtResource("4")
 script = ExtResource("5")
 [node name="InteractionComponent" type="Node" parent="."]
 script = ExtResource("6")
+[node name="InventoryComponent" type="Node" parent="."]
+script = ExtResource("inventory")
+initial_capacity = 6
+[node name="EquipmentComponent" type="Node" parent="."]
+script = ExtResource("equipment")
+[node name="ItemActions" type="Node" parent="." node_paths=PackedStringArray("inventory", "equipment", "status", "actor")]
+script = ExtResource("actions")
+inventory = NodePath("../InventoryComponent")
+equipment = NodePath("../EquipmentComponent")
+status = NodePath("../StatusComponent")
+actor = NodePath("..")

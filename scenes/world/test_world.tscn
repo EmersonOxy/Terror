@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="player"]
 [ext_resource type="Script" uid="uid://dbq0gdfmcagww" path="res://scripts/world/test_world.gd" id="world"]
 
+[ext_resource type="PackedScene" path="res://scenes/items/item_test_sector.tscn" id="items"]
+[ext_resource type="PackedScene" path="res://scenes/ui/inventory_ui.tscn" id="inventory_ui"]
+
 [sub_resource type="BoxShape3D" id="b1s"]
 size = Vector3(30, 0.5, 30)
 
@@ -547,3 +550,8 @@ offset_right = 940.0
 offset_bottom = 690.0
 theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
+
+[node name="ItemTestSector" parent="." instance=ExtResource("items")]
+[node name="InventoryUI" parent="." node_paths=PackedStringArray("player", "cameras") instance=ExtResource("inventory_ui")]
+player = NodePath("../Player")
+cameras = NodePath("../CameraSystem")

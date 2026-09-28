@@ -1,0 +1,80 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://scenes/items/item_pickup.tscn" id="pickup"]
+[ext_resource type="Script" path="res://scripts/items/item_instance.gd" id="instance"]
+[ext_resource type="Resource" path="res://resources/items/bandage.tres" id="bandage"]
+[ext_resource type="Resource" path="res://resources/items/scrap.tres" id="scrap"]
+[ext_resource type="Resource" path="res://resources/items/key.tres" id="key"]
+[ext_resource type="Resource" path="res://resources/items/helmet.tres" id="helmet"]
+[ext_resource type="Resource" path="res://resources/items/vest.tres" id="vest"]
+[ext_resource type="Resource" path="res://resources/items/melee.tres" id="melee"]
+[ext_resource type="Resource" path="res://resources/items/ranged.tres" id="ranged"]
+[sub_resource type="Resource" id="i0"]
+script = ExtResource("instance")
+definition = ExtResource("bandage")
+quantity = 2
+[sub_resource type="Resource" id="i1"]
+script = ExtResource("instance")
+definition = ExtResource("bandage")
+quantity = 3
+[sub_resource type="Resource" id="i2"]
+script = ExtResource("instance")
+definition = ExtResource("scrap")
+quantity = 8
+[sub_resource type="Resource" id="i3"]
+script = ExtResource("instance")
+definition = ExtResource("scrap")
+quantity = 15
+[sub_resource type="Resource" id="i4"]
+script = ExtResource("instance")
+definition = ExtResource("key")
+quantity = 1
+[sub_resource type="Resource" id="i5"]
+script = ExtResource("instance")
+definition = ExtResource("helmet")
+quantity = 1
+[sub_resource type="Resource" id="i6"]
+script = ExtResource("instance")
+definition = ExtResource("vest")
+quantity = 1
+[sub_resource type="Resource" id="i7"]
+script = ExtResource("instance")
+definition = ExtResource("melee")
+quantity = 1
+[sub_resource type="Resource" id="i8"]
+script = ExtResource("instance")
+definition = ExtResource("ranged")
+quantity = 1
+[node name="ItemTestSector" type="Node3D"]
+[node name="Label" type="Label3D" parent="."]
+position = Vector3(-11, 1.0, 7.7)
+text = "ITENS / E pegar / I inventario"
+billboard = 1
+font_size = 36
+pixel_size = 0.01
+[node name="Pickup0" parent="." instance=ExtResource("pickup")]
+position = Vector3(-11,0.185,9)
+item = SubResource("i0")
+[node name="Pickup1" parent="." instance=ExtResource("pickup")]
+position = Vector3(-8,0.185,9)
+item = SubResource("i1")
+[node name="Pickup2" parent="." instance=ExtResource("pickup")]
+position = Vector3(-5,0.185,9)
+item = SubResource("i2")
+[node name="Pickup3" parent="." instance=ExtResource("pickup")]
+position = Vector3(-11,0.185,11)
+item = SubResource("i3")
+[node name="Pickup4" parent="." instance=ExtResource("pickup")]
+position = Vector3(-8,0.185,11)
+item = SubResource("i4")
+[node name="Pickup5" parent="." instance=ExtResource("pickup")]
+position = Vector3(-5,0.185,11)
+item = SubResource("i5")
+[node name="Pickup6" parent="." instance=ExtResource("pickup")]
+position = Vector3(-11,0.185,13)
+item = SubResource("i6")
+[node name="Pickup7" parent="." instance=ExtResource("pickup")]
+position = Vector3(-8,0.185,13)
+item = SubResource("i7")
+[node name="Pickup8" parent="." instance=ExtResource("pickup")]
+position = Vector3(-5,0.185,13)
+item = SubResource("i8")

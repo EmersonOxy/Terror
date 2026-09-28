@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/ui/inventory_ui.gd" id="ui"]
+[ext_resource type="Script" path="res://scripts/ui/inventory_panel.gd" id="panel"]
+[node name="InventoryUI" type="CanvasLayer" node_paths=PackedStringArray("backdrop", "panel", "toast")]
+layer = 5
+script = ExtResource("ui")
+backdrop = NodePath("Backdrop")
+panel = NodePath("Backdrop/Center/InventoryPanel")
+toast = NodePath("Toast")
+[node name="Backdrop" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.02, 0.03, 0.04, 0.88)
+[node name="Center" type="CenterContainer" parent="Backdrop"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+[node name="InventoryPanel" type="PanelContainer" parent="Backdrop/Center"]
+layout_mode = 2
+script = ExtResource("panel")
+[node name="Toast" type="Label" parent="."]
+anchor_left = 0.2
+anchor_right = 0.8
+anchor_top = 0.82
+anchor_bottom = 0.88
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 20
+mouse_filter = 2
