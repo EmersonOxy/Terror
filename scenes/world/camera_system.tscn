@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Script" path="res://scripts/camera/camera_system.gd" id="1"]
+[ext_resource type="Resource" path="res://resources/camera/default.tres" id="2"]
+[sub_resource type="SphereShape3D" id="camera_shape"]
+radius = 0.22
+[node name="CameraSystem" type="Node3D" node_paths=PackedStringArray("orbit", "arm", "third", "iso")]
+script = ExtResource("1")
+config = ExtResource("2")
+orbit = NodePath("Orbit")
+arm = NodePath("Orbit/SpringArm3D")
+third = NodePath("Orbit/SpringArm3D/ThirdPersonCamera")
+iso = NodePath("IsometricCamera")
+[node name="Orbit" type="Node3D" parent="."]
+[node name="SpringArm3D" type="SpringArm3D" parent="Orbit"]
+shape = SubResource("camera_shape")
+collision_mask = 1
+margin = 0.12
+spring_length = 4.2
+[node name="ThirdPersonCamera" type="Camera3D" parent="Orbit/SpringArm3D"]
+near = 0.08
+fov = 65.0
+[node name="IsometricCamera" type="Camera3D" parent="."]
+near = 0.1

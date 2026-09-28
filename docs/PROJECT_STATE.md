@@ -1,0 +1,9 @@
+# Estado do projeto
+
+- **Milestone:** M1 — fundação jogável do Player concluída em Godot 4.7.2.
+- **Implementado:** cápsula física e Visual substituível; WASD relativo à câmera, aceleração/desaceleração, gravidade, snapping, rampa, degraus até 30 cm, corrida/stamina com atraso e recuperação após exaustão, agachamento com bloqueio de teto. Vida/dano/cura/morte e sinais. Interação por proximidade, direção, prioridade e linha de visão; terminal, dano e cura. Terceira pessoa orbital com SpringArm e varredura do offset lateral; isométrica ortográfica (perspectiva configurável). HUD DEBUG e mapa editável.
+- **Ausente intencionalmente:** armas, inimigos, inventário, modelos/animações finais, RPG, saves, multiplayer e HUD final.
+- **Controles:** WASD mover; Shift correr; C agachar (segurar); E interagir; F1 terceira pessoa; F2 isométrica; mouse orbitar em terceira pessoa; Esc alternar captura; R reiniciar, inclusive após morte.
+- **Validação:** importação/parser e duas suítes funcionais; subida/descida de escada e rampa, teto, stamina, interação/E, dano/cura/morte, troca de câmera, colisão do SpringArm, linha de visão, prioridade e ausência de Visual. Captura/orbita do mouse verificadas em execução gráfica. Imagens das duas vistas inspecionadas; cápsula alinhada ao chão e mapa legível. Detalhes em tests/, sem dependência de screenshots.
+- **Limitações conhecidas:** isométrica ainda pode ocultar o jogador atrás de paredes/teto (sem transparência contextual). Subida de degrau aplica deslocamento vertical discreto; câmera suaviza o acompanhamento. Sondagem validada para cenário estático deste mapa, não plataformas móveis. Marcadores de teste são Areas sem colisão sólida. Headless não valida captura de mouse; usar -Visual.
+- **Próximo passo:** testar conforto das duas câmeras e ajustar Resources antes de decidir o estilo principal; avaliar visibilidade sob teto na isométrica.
