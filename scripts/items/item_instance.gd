@@ -5,10 +5,7 @@ extends Resource
 @export_range(0, 999) var quantity: int = 1
 
 static func create(data: ItemDefinition, count: int = 1) -> ItemInstance:
-	var item := ItemInstance.new()
-	item.definition = data
-	item.quantity = count
-	return item
+	return data.create_instance(count) if data != null else null
 
 func is_valid() -> bool:
 	return definition != null and definition.is_valid() and quantity > 0

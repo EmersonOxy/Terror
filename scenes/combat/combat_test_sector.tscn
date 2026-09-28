@@ -1,0 +1,40 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://scenes/combat/combat_dummy.tscn" id="dummy"]
+[ext_resource type="PackedScene" path="res://scenes/items/item_pickup.tscn" id="pickup"]
+[ext_resource type="Resource" path="res://resources/items/ammo.tres" id="ammo"]
+[ext_resource type="Script" path="res://scripts/items/item_instance.gd" id="instance"]
+[sub_resource type="Resource" id="ammo_stack"]
+script = ExtResource("instance")
+definition = ExtResource("ammo")
+quantity = 24
+[sub_resource type="BoxShape3D" id="shape"]
+size = Vector3(2.4, 2.0, 0.4)
+[sub_resource type="BoxMesh" id="mesh"]
+size = Vector3(2.4, 2.0, 0.4)
+[sub_resource type="StandardMaterial3D" id="material"]
+albedo_color = Color(0.35, 0.4, 0.42, 1)
+[node name="CombatTestSector" type="Node3D"]
+[node name="ShortDummy" parent="." instance=ExtResource("dummy")]
+position = Vector3(4, 0, -8)
+[node name="FarDummy" parent="." instance=ExtResource("dummy")]
+position = Vector3(9, 0, -12)
+[node name="CoveredDummy" parent="." instance=ExtResource("dummy")]
+position = Vector3(9, 0, -8)
+[node name="Cover" type="StaticBody3D" parent="." groups=["camera_occluder"]]
+position = Vector3(9, 1, -6)
+collision_layer = 1
+[node name="Collision" type="CollisionShape3D" parent="Cover"]
+shape = SubResource("shape")
+[node name="Mesh" type="MeshInstance3D" parent="Cover"]
+mesh = SubResource("mesh")
+material_override = SubResource("material")
+[node name="Ammo" parent="." instance=ExtResource("pickup")]
+position = Vector3(3, 0.185, -5)
+item = SubResource("ammo_stack")
+[node name="Label" type="Label3D" parent="."]
+position = Vector3(5, 2.5, -11)
+text = "COMBATE / LMB ataque / RMB mira / R recarga
+Armas no setor de itens ao sudoeste / F3 reinicia"
+billboard = 1
+font_size = 28
+pixel_size = 0.01

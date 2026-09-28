@@ -8,6 +8,7 @@
 [ext_resource type="Resource" path="res://resources/items/vest.tres" id="vest"]
 [ext_resource type="Resource" path="res://resources/items/melee.tres" id="melee"]
 [ext_resource type="Resource" path="res://resources/items/ranged.tres" id="ranged"]
+[ext_resource type="Script" path="res://scripts/combat/weapon_instance.gd" id="weapon_instance"]
 [sub_resource type="Resource" id="i0"]
 script = ExtResource("instance")
 definition = ExtResource("bandage")
@@ -37,11 +38,12 @@ script = ExtResource("instance")
 definition = ExtResource("vest")
 quantity = 1
 [sub_resource type="Resource" id="i7"]
-script = ExtResource("instance")
+script = ExtResource("weapon_instance")
 definition = ExtResource("melee")
 quantity = 1
 [sub_resource type="Resource" id="i8"]
-script = ExtResource("instance")
+script = ExtResource("weapon_instance")
+ammo_in_magazine = 6
 definition = ExtResource("ranged")
 quantity = 1
 [node name="ItemTestSector" type="Node3D"]

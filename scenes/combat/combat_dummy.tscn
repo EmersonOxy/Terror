@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Script" path="res://scripts/combat/combat_dummy.gd" id="script"]
+[sub_resource type="BoxShape3D" id="shape"]
+size = Vector3(0.8, 1.8, 0.6)
+[sub_resource type="BoxMesh" id="mesh"]
+size = Vector3(0.8, 1.8, 0.6)
+[node name="CombatDummy" type="StaticBody3D" node_paths=PackedStringArray("mesh", "label")]
+collision_layer = 9
+collision_mask = 0
+script = ExtResource("script")
+mesh = NodePath("Mesh")
+label = NodePath("Label")
+[node name="Collision" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.9, 0)
+shape = SubResource("shape")
+[node name="Mesh" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.9, 0)
+mesh = SubResource("mesh")
+[node name="Label" type="Label3D" parent="."]
+position = Vector3(0, 2.15, 0)
+billboard = 1
+font_size = 28
+pixel_size = 0.009

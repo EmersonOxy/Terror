@@ -1,12 +1,20 @@
-[gd_resource type="Resource" script_class="ItemDefinition" load_steps=2 format=3]
-[ext_resource type="Script" path="res://scripts/items/item_definition.gd" id="definition"]
+[gd_resource type="Resource" script_class="WeaponDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/combat/weapon_definition.gd" id="definition"]
 
+[ext_resource type="Resource" path="res://resources/items/ammo.tres" id="ammo"]
 [resource]
 script = ExtResource("definition")
 id = &"ranged"
 display_name = "Arma de alcance"
-description = "Item leve equipável. Sem tiro ou munição neste milestone."
+description = "Hitscan. Dano 20; carregador de 6 tiros. RMB mira, R recarrega."
 category = 2
 max_stack = 1
 equip_slot = 1
 weight_class = 1
+
+weapon_type = 1
+damage = 20.0
+stamina_cost = 0.0
+attack_interval = 0.3
+range = 35.0
+ammunition = ExtResource("ammo")

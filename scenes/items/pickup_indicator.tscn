@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Material" path="res://resources/items/pickup_indicator.tres" id="material"]
+[sub_resource type="QuadMesh" id="quad"]
+size = Vector2(1, 1)
+material = ExtResource("material")
+[node name="PickupIndicator" type="Node3D"]
+position = Vector3(0, 0.12, 0)
+[node name="Line" type="MeshInstance3D" parent="."]
+mesh = SubResource("quad")
+cast_shadow = 0
+extra_cull_margin = 3.0
+[node name="Cross" type="MeshInstance3D" parent="."]
+rotation = Vector3(0, 1.5707963, 0)
+mesh = SubResource("quad")
+cast_shadow = 0
+extra_cull_margin = 3.0

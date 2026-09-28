@@ -18,7 +18,7 @@ var drop_button: Button
 func setup(controller: ItemActions) -> void:
 	actions = controller
 	var background := StyleBoxFlat.new()
-	background.bg_color = Color(0.075, 0.085, 0.095, 1.0)
+	background.bg_color = Color(0.075, 0.085, 0.095, 0.96)
 	background.set_border_width_all(1)
 	background.border_color = Color(0.28, 0.31, 0.34)
 	add_theme_stylebox_override("panel", background)
@@ -31,46 +31,47 @@ func setup(controller: ItemActions) -> void:
 	theme = button_theme
 	var margin := MarginContainer.new()
 	for side in ["left", "right", "top", "bottom"]:
-		margin.add_theme_constant_override("margin_" + side, 18)
+		margin.add_theme_constant_override("margin_" + side, 12)
 	add_child(margin)
 	var column := VBoxContainer.new()
-	column.add_theme_constant_override("separation", 12)
+	column.add_theme_constant_override("separation", 8)
 	margin.add_child(column)
 	var title := Label.new()
-	title.text = "INVENTÁRIO / DEBUG                            I ou Esc para fechar"
-	title.add_theme_font_size_override("font_size", 21)
+	title.text = "INVENTÁRIO    TAB segurar · I fixar"
+	title.add_theme_font_size_override("font_size", 17)
 	column.add_child(title)
-	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 20)
-	column.add_child(row)
-	var backpack := VBoxContainer.new()
-	backpack.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	row.add_child(backpack)
-	capacity_label = Label.new()
-	backpack.add_child(capacity_label)
-	var scroll := ScrollContainer.new()
-	scroll.custom_minimum_size = Vector2(470, 195)
-	backpack.add_child(scroll)
-	grid = GridContainer.new()
-	grid.columns = 2
-	scroll.add_child(grid)
-	var equipment := VBoxContainer.new()
-	equipment.custom_minimum_size.x = 275
-	row.add_child(equipment)
-	var equip_title := Label.new()
-	equip_title.text = "EQUIPAMENTOS (fora da mochila)"
-	equipment.add_child(equip_title)
+	var equipment := HBoxContainer.new()
+	equipment.add_theme_constant_override("separation", 8)
+	column.add_child(equipment)
 	for slot in EquipmentComponent.SLOTS:
 		var button := Button.new()
-		button.custom_minimum_size = Vector2(275, 48)
+		button.custom_minimum_size = Vector2(0, 66)
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		button.clip_text = true
+		button.add_theme_font_size_override("font_size", 13)
 		button.pressed.connect(select_equipment.bind(slot))
 		equipment.add_child(button)
 		equip_buttons[slot] = button
+	var spacer := Control.new()
+	spacer.custom_minimum_size.y = 10
+	column.add_child(spacer)
+	capacity_label = Label.new()
+	column.add_child(capacity_label)
+	var scroll := ScrollContainer.new()
+	scroll.custom_minimum_size = Vector2(0, 238)
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	column.add_child(scroll)
+	grid = GridContainer.new()
+	grid.columns = 1
+	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.add_child(grid)
 	details = Label.new()
-	details.custom_minimum_size = Vector2(770, 105)
+	details.custom_minimum_size = Vector2(0, 116)
 	details.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	column.add_child(details)
-	var buttons := HBoxContainer.new()
+	var buttons := GridContainer.new()
+	buttons.columns = 2
 	buttons.add_theme_constant_override("separation", 12)
 	column.add_child(buttons)
 	use_button = action_button(buttons, "Usar", _use)
@@ -78,7 +79,7 @@ func setup(controller: ItemActions) -> void:
 	unequip_button = action_button(buttons, "Desequipar", _unequip)
 	drop_button = action_button(buttons, "Largar stack", _drop)
 	message = Label.new()
-	message.custom_minimum_size.y = 25
+	message.custom_minimum_size.y = 42
 	message.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	column.add_child(message)
 	actions.inventory.inventory_changed.connect(refresh)
@@ -91,7 +92,7 @@ func setup(controller: ItemActions) -> void:
 func action_button(parent: Control, text: String, callback: Callable) -> Button:
 	var button := Button.new()
 	button.text = text
-	button.custom_minimum_size = Vector2(140, 38)
+	button.custom_minimum_size = Vector2(160, 34)
 	button.pressed.connect(callback)
 	parent.add_child(button)
 	return button
@@ -104,7 +105,9 @@ func refresh() -> void:
 		slot_buttons.clear()
 		for i in actions.inventory.capacity():
 			var button := Button.new()
-			button.custom_minimum_size = Vector2(225, 48)
+			button.custom_minimum_size = Vector2(0, 34)
+			button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			button.clip_text = true
 			button.pressed.connect(select_inventory.bind(i))
 			grid.add_child(button)
 			slot_buttons.append(button)
@@ -114,7 +117,9 @@ func refresh() -> void:
 		slot_buttons[i].text = "%d · %s" % [i + 1, item_text(item)]
 		slot_buttons[i].modulate = Color(0.7, 0.85, 0.8) if selected_index == i else Color.WHITE
 	for slot in EquipmentComponent.SLOTS:
-		equip_buttons[slot].text = ItemDefinition.EquipSlot.keys()[slot] + ": " + item_text(actions.equipment.get_equipped(slot))
+		var equipped_text := item_text(actions.equipment.get_equipped(slot))
+		equip_buttons[slot].text = ItemDefinition.EquipSlot.keys()[slot] + "\n" + (equipped_text.left(12) + "…" if equipped_text.length() > 13 else equipped_text)
+		equip_buttons[slot].tooltip_text = equipped_text
 		equip_buttons[slot].modulate = Color(0.7, 0.85, 0.8) if selected_equipment == slot else Color.WHITE
 	var item := actions.equipment.get_equipped(selected_equipment) if selected_equipment != ItemDefinition.EquipSlot.NONE else actions.inventory.get_slot(selected_index)
 	use_button.visible = false
@@ -123,7 +128,7 @@ func refresh() -> void:
 	drop_button.visible = false
 	if item == null:
 		details.text = "Selecione um item na mochila ou nos equipamentos.
-Equipamentos não fornecem atributos neste milestone."
+Armaduras ainda não fornecem atributos."
 		return
 	details.text = "%s x%d\n%s\nCategoria: %s | Peso: %s | Slot: %s" % [item.definition.display_name, item.quantity, item.definition.description, ItemDefinition.Category.keys()[item.definition.category], ItemDefinition.WeightClass.keys()[item.definition.weight_class], ItemDefinition.EquipSlot.keys()[item.definition.equip_slot]]
 	var equipped := selected_equipment != ItemDefinition.EquipSlot.NONE

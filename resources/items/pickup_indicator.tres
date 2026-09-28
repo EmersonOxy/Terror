@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3]
+[ext_resource type="Shader" path="res://shaders/pickup_indicator.gdshader" id="shader"]
+[resource]
+shader = ExtResource("shader")
+shader_parameter/enabled = true
+shader_parameter/height = 1.25
+shader_parameter/thickness = 0.045
+shader_parameter/opacity = 0.55
+shader_parameter/color = Color(0.7, 0.85, 0.8, 1)
+shader_parameter/intensity = 0.85

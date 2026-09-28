@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="ItemDefinition" load_steps=2 format=3]
-[ext_resource type="Script" path="res://scripts/items/item_definition.gd" id="definition"]
+[gd_resource type="Resource" script_class="WeaponDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://scripts/combat/weapon_definition.gd" id="definition"]
 
 [resource]
 script = ExtResource("definition")
 id = &"melee"
 display_name = "Arma melee"
-description = "Item médio equipável. Sem ataque neste milestone."
+description = "Golpe curto. Dano 25; custo 18 de stamina."
 category = 2
 max_stack = 1
 equip_slot = 1

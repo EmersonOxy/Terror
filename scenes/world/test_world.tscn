@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" path="res://scenes/items/item_test_sector.tscn" id="items"]
 [ext_resource type="PackedScene" path="res://scenes/ui/inventory_ui.tscn" id="inventory_ui"]
 
+[ext_resource type="Script" path="res://scripts/camera/camera_aim_provider.gd" id="aim"]
+[ext_resource type="Script" path="res://scripts/ui/combat_hud.gd" id="combat_hud"]
+[ext_resource type="PackedScene" path="res://scenes/combat/combat_test_sector.tscn" id="combat_sector"]
 [sub_resource type="BoxShape3D" id="b1s"]
 size = Vector3(30, 0.5, 30)
 
@@ -214,8 +217,9 @@ ambient_light_source = 3
 ambient_light_color = Color(0.8, 0.85, 1, 1)
 ambient_light_energy = 0.7
 
-[node name="TestWorld" type="Node3D" unique_id=86126591 node_paths=PackedStringArray("player", "cameras")]
+[node name="TestWorld" type="Node3D" unique_id=86126591 node_paths=PackedStringArray("player", "cameras", "aim")]
 script = ExtResource("world")
+aim = NodePath("AimProvider")
 player = NodePath("Player")
 cameras = NodePath("CameraSystem")
 
@@ -555,3 +559,11 @@ horizontal_alignment = 1
 [node name="InventoryUI" parent="." node_paths=PackedStringArray("player", "cameras") instance=ExtResource("inventory_ui")]
 player = NodePath("../Player")
 cameras = NodePath("../CameraSystem")
+
+[node name="AimProvider" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("aim")
+actor = NodePath("../Player")
+[node name="CombatHUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("combat_hud")
+player = NodePath("../Player")
+[node name="CombatTestSector" parent="." instance=ExtResource("combat_sector")]

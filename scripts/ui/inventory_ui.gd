@@ -6,6 +6,8 @@ extends CanvasLayer
 @export var panel: InventoryPanel
 @export var toast: Label
 var is_open: bool = false
+var held_by_tab: bool = false
+var pinned_by_i: bool = false
 var _previous_mouse: Input.MouseMode
 var _toast_time: float = 0.0
 
@@ -15,14 +17,22 @@ func _ready() -> void:
 	player.items.feedback.connect(_feedback)
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("inventory_toggle"):
-		set_open(not is_open)
-		get_viewport().set_input_as_handled()
+	if event.is_action("inventory_hold") and not event.is_echo():
+		held_by_tab = event.is_pressed()
+	elif event.is_action_pressed("inventory_toggle"):
+		pinned_by_i = not pinned_by_i
 	elif is_open and event.is_action_pressed("release_mouse"):
-		set_open(false)
-		get_viewport().set_input_as_handled()
+		pinned_by_i = false
+	else:
+		return
+	_apply_open(held_by_tab or pinned_by_i)
+	get_viewport().set_input_as_handled()
 
 func set_open(value: bool) -> void:
+	pinned_by_i = value
+	_apply_open(held_by_tab or pinned_by_i)
+
+func _apply_open(value: bool) -> void:
 	if value == is_open:
 		return
 	is_open = value
@@ -30,6 +40,7 @@ func set_open(value: bool) -> void:
 	cameras.controls_locked = value
 	backdrop.visible = value
 	if value:
+		player.combat.tick(0.0, false)
 		_previous_mouse = Input.mouse_mode
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		player.velocity.x = 0.0

@@ -2,9 +2,11 @@ extends Node3D
 
 @export var player: Player
 @export var cameras: CameraSystem
+@export var aim: CameraAimProvider
 
 func _ready() -> void:
 	process_physics_priority = -10
+	player.aim_provider = aim
 	player.items.drop_parent = self
 	cameras.occlusion.visual = player.visual
 	player.status.damaged.connect(func(amount: float): print("DAMAGE %.1f | health %.1f" % [amount, player.status.health]))
@@ -12,6 +14,8 @@ func _ready() -> void:
 	cameras.mode_changed.connect(func(mode: String): print("CAMERA " + mode))
 
 func _physics_process(_delta: float) -> void:
+	aim.camera = get_viewport().get_camera_3d()
+	aim.use_cursor = cameras.mode == "Isometrica"
 	cameras.occlusion.target_height = player.collider.shape.height
 	player.movement_basis = cameras.movement_orientation()
 	cameras.focus_height = minf(cameras.config.height, player.collider.shape.height * 0.75)

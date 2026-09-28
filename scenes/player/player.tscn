@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=12 format=3]
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1"]
 [ext_resource type="Resource" path="res://resources/player/default.tres" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/player/placeholder.tscn" id="3"]
@@ -8,10 +8,11 @@
 [ext_resource type="Script" path="res://scripts/components/inventory_component.gd" id="inventory"]
 [ext_resource type="Script" path="res://scripts/components/equipment_component.gd" id="equipment"]
 [ext_resource type="Script" path="res://scripts/items/item_actions.gd" id="actions"]
+[ext_resource type="Script" path="res://scripts/combat/combat_component.gd" id="combat"]
 [sub_resource type="CapsuleShape3D" id="shape"]
 radius = 0.3
 height = 1.8
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("collider", "visual", "movement", "status", "interaction", "inventory", "equipment", "items")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("collider", "visual", "movement", "status", "interaction", "inventory", "equipment", "items", "combat")]
 collision_layer = 2
 collision_mask = 1
 script = ExtResource("1")
@@ -24,6 +25,7 @@ interaction = NodePath("InteractionComponent")
 inventory = NodePath("InventoryComponent")
 equipment = NodePath("EquipmentComponent")
 items = NodePath("ItemActions")
+combat = NodePath("CombatComponent")
 [node name="Collision" type="CollisionShape3D" parent="."]
 position = Vector3(0, 0.9, 0)
 shape = SubResource("shape")
@@ -45,3 +47,10 @@ inventory = NodePath("../InventoryComponent")
 equipment = NodePath("../EquipmentComponent")
 status = NodePath("../StatusComponent")
 actor = NodePath("..")
+
+[node name="CombatComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "equipment", "inventory", "status")]
+script = ExtResource("combat")
+actor = NodePath("..")
+equipment = NodePath("../EquipmentComponent")
+inventory = NodePath("../InventoryComponent")
+status = NodePath("../StatusComponent")

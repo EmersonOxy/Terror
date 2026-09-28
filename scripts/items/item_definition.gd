@@ -18,3 +18,10 @@ enum WeightClass { NONE, LIGHT, MEDIUM, HEAVY }
 
 func is_valid() -> bool:
 	return not id.is_empty() and max_stack >= 1 and (equip_slot == EquipSlot.NONE or max_stack == 1)
+
+# Factory keeps specialized instance state outside the generic inventory.
+func create_instance(count: int = 1) -> ItemInstance:
+	var item := ItemInstance.new()
+	item.definition = self
+	item.quantity = count
+	return item
