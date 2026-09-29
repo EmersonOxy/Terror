@@ -32,5 +32,7 @@ extends Resource
 @export var stagger_duration: float = 0.35
 @export var corpse_lifetime: float = 6.0
 @export var xp_reward: int = 25
+@export var grant_rewards: bool = true
+@export var loot_table: Resource
 @export_group("Debug")
 @export var show_label: bool = true

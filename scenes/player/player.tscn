@@ -19,6 +19,7 @@
 [ext_resource type="Resource" path="res://resources/items/build_heavy.tres" id="b_heavy"]
 [ext_resource type="Resource" path="res://resources/items/build_medium.tres" id="b_medium"]
 [ext_resource type="Resource" path="res://resources/items/build_light.tres" id="b_light"]
+[ext_resource type="Script" path="res://scripts/components/wallet_component.gd" id="wallet_script"]
 [sub_resource type="CapsuleShape3D" id="shape"]
 radius = 0.3
 height = 1.8
@@ -84,3 +85,7 @@ script = ExtResource("resolver_script")
 equipment = NodePath("../EquipmentComponent")
 modifiers = NodePath("../PlayerModifiers")
 build_definitions = [ExtResource("b_heavy"), ExtResource("b_medium"), ExtResource("b_light")]
+
+[node name="WalletComponent" type="Node" parent="."]
+script = ExtResource("wallet_script")
+initial_balance = 150

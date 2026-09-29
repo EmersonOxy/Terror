@@ -14,3 +14,4 @@ description = "Recupera 30 de vida. Não é usada com vida cheia ou após morte.
 category = 1
 max_stack = 3
 use_effect = SubResource("effect")
+base_value = 15

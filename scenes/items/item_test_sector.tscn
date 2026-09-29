@@ -48,35 +48,35 @@ definition = ExtResource("ranged")
 quantity = 1
 [node name="ItemTestSector" type="Node3D"]
 [node name="Label" type="Label3D" parent="."]
-position = Vector3(-11, 1.0, 7.7)
-text = "ITENS / E pegar / I inventario"
+position = Vector3(0, 2.0, -2)
+text = "03 - ITENS / INVENTÁRIO\nE pegar / I inventario"
 billboard = 1
-font_size = 36
+font_size = 48
 pixel_size = 0.01
 [node name="Pickup0" parent="." instance=ExtResource("pickup")]
-position = Vector3(-11,0.185,9)
+position = Vector3(-8,0.185,0)
 item = SubResource("i0")
 [node name="Pickup1" parent="." instance=ExtResource("pickup")]
-position = Vector3(-8,0.185,9)
+position = Vector3(-6,0.185,0)
 item = SubResource("i1")
 [node name="Pickup2" parent="." instance=ExtResource("pickup")]
-position = Vector3(-5,0.185,9)
+position = Vector3(-4,0.185,0)
 item = SubResource("i2")
 [node name="Pickup3" parent="." instance=ExtResource("pickup")]
-position = Vector3(-11,0.185,11)
+position = Vector3(-2,0.185,0)
 item = SubResource("i3")
 [node name="Pickup4" parent="." instance=ExtResource("pickup")]
-position = Vector3(-8,0.185,11)
+position = Vector3(0,0.185,0)
 item = SubResource("i4")
 [node name="Pickup5" parent="." instance=ExtResource("pickup")]
-position = Vector3(-5,0.185,11)
+position = Vector3(2,0.185,0)
 item = SubResource("i5")
 [node name="Pickup6" parent="." instance=ExtResource("pickup")]
-position = Vector3(-11,0.185,13)
+position = Vector3(4,0.185,0)
 item = SubResource("i6")
 [node name="Pickup7" parent="." instance=ExtResource("pickup")]
-position = Vector3(-8,0.185,13)
+position = Vector3(6,0.185,0)
 item = SubResource("i7")
 [node name="Pickup8" parent="." instance=ExtResource("pickup")]
-position = Vector3(-5,0.185,13)
+position = Vector3(8,0.185,0)
 item = SubResource("i8")

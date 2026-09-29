@@ -10,7 +10,7 @@ func run() -> void:
 	player = world.player
 	inv = player.inventory
 	await frames(5)
-	await place(Vector3(-11, 0.02, 10.5))
+	await place(Vector3(2, 0.02, 21.5))
 	player.movement.facing = Vector3.FORWARD
 	await frames(2)
 	var pickup := world.get_node("ItemTestSector/Pickup0") as ItemPickup
@@ -21,7 +21,7 @@ func run() -> void:
 	await frames(1)
 	check(inv.get_quantity(&"bandage") == 2 and not is_instance_valid(pickup), "E collects item and removes empty pickup")
 	inv.add_quantity(key, 5)
-	await place(Vector3(-8, 0.02, 10.5))
+	await place(Vector3(4, 0.02, 21.5))
 	player.movement.facing = Vector3.FORWARD
 	await frames(2)
 	pickup = world.get_node("ItemTestSector/Pickup1")

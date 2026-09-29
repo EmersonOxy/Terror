@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LootEntry" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/items/loot_entry.gd" id="1"]
+[ext_resource type="Resource" path="res://resources/items/scrap.tres" id="2"]
+
+[resource]
+script = ExtResource("1")
+item = ExtResource("2")
+chance = 0.5
+min_quantity = 1
+max_quantity = 3
+guaranteed = false

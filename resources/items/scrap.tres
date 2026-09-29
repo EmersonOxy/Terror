@@ -10,3 +10,4 @@ category = 0
 max_stack = 10
 equip_slot = 0
 weight_class = 0
+base_value = 5

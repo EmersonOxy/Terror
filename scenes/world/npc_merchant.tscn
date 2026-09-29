@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://df7j4g1xq7g3x"]
+
+[ext_resource type="Script" path="res://scripts/world/npc.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/components/shop_component.gd" id="2"]
+[ext_resource type="Resource" path="res://resources/items/shop_inventory_test.tres" id="3"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6o45v"]
+radius = 0.3
+height = 1.8
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_n8w72"]
+radius = 0.3
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h27m1"]
+albedo_color = Color(0.2, 0.4, 0.8, 1)
+
+[node name="NPC" type="StaticBody3D" node_paths=PackedStringArray("shop", "label_node", "mesh_node")]
+collision_layer = 5
+collision_mask = 0
+script = ExtResource("1")
+npc_id = &"merchant_01"
+display_name = "Mercador"
+shop = NodePath("ShopComponent")
+label_node = NodePath("Label")
+mesh_node = NodePath("Mesh")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_6o45v")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.9, 0)
+mesh = SubResource("CapsuleMesh_n8w72")
+surface_material_override/0 = SubResource("StandardMaterial3D_h27m1")
+
+[node name="Label" type="Label3D" parent="."]
+position = Vector3(0, 2.1, 0)
+text = "Mercador"
+billboard = 1
+
+[node name="ShopComponent" type="Node" parent="."]
+script = ExtResource("2")
+shop_data = ExtResource("3")

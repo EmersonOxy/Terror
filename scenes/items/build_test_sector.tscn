@@ -52,40 +52,121 @@ ammo_in_magazine = 6
 definition = ExtResource("light_weapon")
 quantity = 1
 
+[sub_resource type="BoxMesh" id="pedestal_mesh"]
+size = Vector3(2, 0.2, 5)
+
+[sub_resource type="StandardMaterial3D" id="mat_heavy"]
+albedo_color = Color(0.6, 0.3, 0.3, 1)
+
+[sub_resource type="StandardMaterial3D" id="mat_medium"]
+albedo_color = Color(0.3, 0.6, 0.3, 1)
+
+[sub_resource type="StandardMaterial3D" id="mat_light"]
+albedo_color = Color(0.3, 0.3, 0.6, 1)
+
+[sub_resource type="BoxShape3D" id="pedestal_shape"]
+size = Vector3(2, 0.2, 5)
+
 [node name="BuildTestSector" type="Node3D"]
+
 [node name="Label" type="Label3D" parent="."]
-position = Vector3(0, 1.0, 0)
-text = "BUILD TEST\nHeavy | Medium | Light"
+position = Vector3(0, 3.0, -3)
+text = "04 - EQUIPAMENTOS / BUILDS"
 billboard = 1
-font_size = 36
+font_size = 64
 pixel_size = 0.01
 
-[node name="HeavyHead" parent="." instance=ExtResource("pickup")]
-position = Vector3(-2, 0.185, 2)
+[node name="HeavySet" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+
+[node name="Pedestal" type="StaticBody3D" parent="HeavySet"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="HeavySet/Pedestal"]
+material_override = SubResource("mat_heavy")
+mesh = SubResource("pedestal_mesh")
+
+[node name="Collision" type="CollisionShape3D" parent="HeavySet/Pedestal"]
+shape = SubResource("pedestal_shape")
+
+[node name="Label" type="Label3D" parent="HeavySet"]
+position = Vector3(0, 1.0, -3)
+text = "HEAVY SET"
+billboard = 1
+font_size = 40
+pixel_size = 0.01
+
+[node name="HeavyHead" parent="HeavySet" instance=ExtResource("pickup")]
+position = Vector3(0, 0.3, -1.5)
 item = SubResource("i_hh")
-[node name="HeavyBody" parent="." instance=ExtResource("pickup")]
-position = Vector3(-2, 0.185, 3)
+
+[node name="HeavyBody" parent="HeavySet" instance=ExtResource("pickup")]
+position = Vector3(0, 0.3, 0)
 item = SubResource("i_hb")
-[node name="HeavyWeapon" parent="." instance=ExtResource("pickup")]
-position = Vector3(-2, 0.185, 4)
+
+[node name="HeavyWeapon" parent="HeavySet" instance=ExtResource("pickup")]
+position = Vector3(0, 0.3, 1.5)
 item = SubResource("i_hw")
 
-[node name="MediumHead" parent="." instance=ExtResource("pickup")]
-position = Vector3(0, 0.185, 2)
+[node name="MediumSet" type="Node3D" parent="."]
+
+[node name="Pedestal" type="StaticBody3D" parent="MediumSet"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="MediumSet/Pedestal"]
+material_override = SubResource("mat_medium")
+mesh = SubResource("pedestal_mesh")
+
+[node name="Collision" type="CollisionShape3D" parent="MediumSet/Pedestal"]
+shape = SubResource("pedestal_shape")
+
+[node name="Label" type="Label3D" parent="MediumSet"]
+position = Vector3(0, 1.0, -3)
+text = "MEDIUM SET"
+billboard = 1
+font_size = 40
+pixel_size = 0.01
+
+[node name="MediumHead" parent="MediumSet" instance=ExtResource("pickup")]
+position = Vector3(0, 0.3, -1.5)
 item = SubResource("i_mh")
-[node name="MediumBody" parent="." instance=ExtResource("pickup")]
-position = Vector3(0, 0.185, 3)
+
+[node name="MediumBody" parent="MediumSet" instance=ExtResource("pickup")]
+position = Vector3(0, 0.3, 0)
 item = SubResource("i_mb")
-[node name="MediumWeapon" parent="." instance=ExtResource("pickup")]
-position = Vector3(0, 0.185, 4)
+
+[node name="MediumWeapon" parent="MediumSet" instance=ExtResource("pickup")]
+position = Vector3(0, 0.3, 1.5)
 item = SubResource("i_mw")
 
-[node name="LightHead" parent="." instance=ExtResource("pickup")]
-position = Vector3(2, 0.185, 2)
+[node name="LightSet" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+
+[node name="Pedestal" type="StaticBody3D" parent="LightSet"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="LightSet/Pedestal"]
+material_override = SubResource("mat_light")
+mesh = SubResource("pedestal_mesh")
+
+[node name="Collision" type="CollisionShape3D" parent="LightSet/Pedestal"]
+shape = SubResource("pedestal_shape")
+
+[node name="Label" type="Label3D" parent="LightSet"]
+position = Vector3(0, 1.0, -3)
+text = "LIGHT SET"
+billboard = 1
+font_size = 40
+pixel_size = 0.01
+
+[node name="LightHead" parent="LightSet" instance=ExtResource("pickup")]
+position = Vector3(0, 0.3, -1.5)
 item = SubResource("i_lh")
-[node name="LightBody" parent="." instance=ExtResource("pickup")]
-position = Vector3(2, 0.185, 3)
+
+[node name="LightBody" parent="LightSet" instance=ExtResource("pickup")]
+position = Vector3(0, 0.3, 0)
 item = SubResource("i_lb")
-[node name="LightWeapon" parent="." instance=ExtResource("pickup")]
-position = Vector3(2, 0.185, 4)
+
+[node name="LightWeapon" parent="LightSet" instance=ExtResource("pickup")]
+position = Vector3(0, 0.3, 1.5)
 item = SubResource("i_lw")

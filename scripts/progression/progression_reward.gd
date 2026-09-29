@@ -8,6 +8,8 @@ extends Node
 func on_enemy_died(enemy: Enemy) -> void:
 	if not is_instance_valid(progression):
 		return
+	if not enemy.definition.grant_rewards:
+		return
 	var key := StringName(str(enemy.get_instance_id()))
 	if progression.was_rewarded(key):
 		return

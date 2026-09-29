@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="BuildDefinition" load_steps=3 format=3]
+[gd_resource type="Resource" script_class="BuildDefinition" format=3 uid="uid://budw6ovxs2505"]
 
-[ext_resource type="Script" path="res://scripts/items/build_definition.gd" id="1_build"]
-[ext_resource type="Script" path="res://scripts/components/modifier_definition.gd" id="2_mod"]
+[ext_resource type="Script" uid="uid://cyk4hl76pl2jc" path="res://scripts/items/build_definition.gd" id="1_build"]
+[ext_resource type="Script" uid="uid://d2gk3heenrq7s" path="res://scripts/components/modifier_definition.gd" id="2_mod"]
 
 [sub_resource type="Resource" id="Resource_hp"]
 script = ExtResource("2_mod")
@@ -23,5 +23,7 @@ script = ExtResource("1_build")
 id = &"heavy"
 display_name = "Heavy"
 required_weight_class = 3
-description = "+15 Max HP\n+10% Dano Melee\n-8% Velocidade"
-modifiers = Array[ExtResource("2_mod")]([SubResource("Resource_hp"), SubResource("Resource_melee"), SubResource("Resource_speed")])
+description = "+15 Max HP
++10% Dano Melee
+-8% Velocidade"
+modifiers = [SubResource("Resource_hp"), SubResource("Resource_melee"), SubResource("Resource_speed")]

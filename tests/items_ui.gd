@@ -103,7 +103,7 @@ func run() -> void:
 	check(panel.get_global_rect().end.x <= 1280 and panel.get_global_rect().end.y <= 720, "panel fits viewport")
 	await key_event(KEY_ESCAPE)
 	check(not ui.is_open, "Escape closes inventory")
-	await place(Vector3(-8, 0.02, 8))
+	await place(Vector3(10, 0.02, 28))
 	world.cameras.set_mode(true)
 	await frames(30)
 	await shot("test_sector")

@@ -16,6 +16,7 @@ enum WeightClass { NONE, LIGHT, MEDIUM, HEAVY }
 @export var weight_class: WeightClass = WeightClass.NONE
 @export var modifiers: Array = []
 @export var use_effect: ItemUseEffect
+@export_range(0, 9999) var base_value: int = 0
 
 func is_valid() -> bool:
 	return not id.is_empty() and max_stack >= 1 and (equip_slot == EquipSlot.NONE or max_stack == 1)

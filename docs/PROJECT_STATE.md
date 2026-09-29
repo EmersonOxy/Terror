@@ -1,14 +1,11 @@
 # Estado do projeto
 
-- **Milestone:** XP, Level e Progressão de Personagem. Milestones anteriores preservados.
-- **Progressão (XP/Level):** ProgressionComponent mantém level (máximo 20), xp atual, e pontos de progressão. Curva configurável (ProgressionConfig) define XP necessário (base_xp * growth_factor). Excesso de XP transitado corretamente para o próximo nível. Sem dependência de inventário ou inimigos.
-- **Upgrades:** Três caminhos baseados em recursos (UpgradeDefinition): Vitalidade (+5 Max HP e HP atual), Condicionamento (+5 Max Stamina e atual), e Mochila (+1 slot). Pontos ganhos por nível são gastos nestes upgrades. Efeitos aplicados pelo composition root (ProgressionEffects) diretamente no StatusComponent e InventoryComponent. O inventário se adapta dinamicamente ao novo limite.
-- **Recompensas (Fontes de XP):** Inimigos concedem XP ao morrer (EnemyDefinition.xp_reward) e objetivos de teste podem conceder XP (ProgressionTestObjective). Recompensas únicas por instância, mediadas pelo ProgressionReward para não acoplar as origens ao ProgressionComponent.
-- **UI de Progressão:** P abre painel (ProgressionUI) bloqueando jogo (como inventário). Mostra Nível, XP atual/necessário (barra) e permite gastar pontos. Fechar inventário e progressão são mutuamente exclusivos. Feedback sutil (ProgressionHUD) mostra XP ganho e aviso de nível sem pausar o jogo.
-- **Testes:** Validação confirmada do sistema de XP, limites, transição de nível, compra de upgrades, aumento real de status e capacidade da mochila, UI mutex e UI feedback. F4 adiciona 50 XP por debug.
-- **Milestone Atual:** Build Resolver + Sinergias baseadas em equipamentos.
-- **Sinergias/Builds:** `BuildResolver` monitora os slots `HEAD`, `BODY`, `WEAPON`. Quando os três possuem a mesma classificação (`weight_class` LIGHT, MEDIUM ou HEAVY) e não são nulos, ativa a respectiva `BuildDefinition` (provisórias: *Heavy Synergy*, *Medium Synergy*, *Light Synergy*). 
-- **Modificadores (Efeitos individuais e globais):** Novo sistema tipado e seguro. `PlayerModifiers` agrupa todos os modificadores aditivos ou multiplicativos (`MAX_HEALTH_ADD`, `MAX_STAMINA_ADD`, `MOVE_SPEED_MULT`, `MELEE_DAMAGE_MULT`, `RANGED_DAMAGE_MULT`, `SPRINT_STAMINA_COST_MULT`), e as raízes do Player os calculam dinamicamente (base + add * mult). Itens mantêm efeitos independentes, aplicados junto e/ou sobrepondo os das builds ativas.
-- **Integração:** Progressão e Build são totalmente independentes! Os efeitos da Progressão atualizam o limite base real; `StatusComponent` recalcula proporção da vida/stamina instantaneamente ao receber um modificador de build/item, mantendo coesão (clamp para limite máximo novo, escalar para vida atual). Combate, movimento e sprint são multiplicados sem sobrescrever as predefinições.
-- **UI & HUD:** `DebugHUD` agora informa a build ativa e multiplicadores. Inventário detalha a "SINERGIA" atual e exibe a classificação no slot do item. Um sistema de "toast" comunica a ativação/desativação das sinergias no momento do trânsito dos itens.
-- **Próximo milestone:** NPCs + comércio + loot/drop system.
+- **Milestone Atual:** Organização da Sandbox + Ajustes de Combate + NPC Base + Comércio + Loot/Drops. (CONCLUÍDO)
+- **Progressão e Sinergias (Builds):** `ProgressionComponent` cuida de XP/Level; `BuildResolver` coordena sinergias (equipamentos LIGHT/MEDIUM/HEAVY). Modificadores tipados combinam bônus dinamicamente.
+- **Comércio e Economia:** `WalletComponent` no Player armazena moeda. Itens com `base_value` permitem trocas. `ShopComponent` intermedeia a compra/venda; `ShopUI` desenha a tela de transação.
+- **NPC Base:** Classe `NPC` possibilita a interação. Dispara sinal de `shop_requested` para abrir a interface do mercador.
+- **Loot e Drops:** `EnemyDefinition` ganhou as bandeiras `grant_rewards` e suporte a `loot_table`. Derrotar inimigos instancia `ItemPickup` através do `LootDropper`. Inimigos da área de testes de combate (dummies) naturalmente não dropam recursos/loot.
+- **Ajustes de Combate / HUD:** `CombatHUD` conta com retícula dinâmica e *hit markers* ao confirmar impacto (4 marcas ao redor da retícula, 0.22s fade). Cursor do SO é bloqueado apropriadamente na mira ranged isométrica usando a hierarquia/mutex de UI.
+- **Organização Sandbox:** O `TestWorld` foi estendido. `ItemTestSector` e `BuildTestSector` movidos para espaços próprios sem bloqueios visuais indesejados. Testes end-to-end atualizados para respeitar a nova topologia física (distância de interação com as novas coordenadas exatas globais).
+
+- **Próximos passos:** Iniciar o planejamento e construção da primeira área REAL do jogo.

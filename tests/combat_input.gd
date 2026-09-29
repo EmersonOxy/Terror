@@ -155,7 +155,7 @@ func run() -> void:
 				var previous := inv.take(1)
 				inv.replace_slot(1, inv.take(i))
 				inv.replace_slot(i, previous)
-	await place(Vector3(-8, 0.02, 7))
+	await place(Vector3(10, 0.02, 28))
 	for iso_mode in [false, true]:
 		world.cameras.set_mode(iso_mode)
 		if not iso_mode:
