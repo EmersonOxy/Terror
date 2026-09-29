@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+signal open_changed(is_open: bool)
+
 @export var player: Player
 @export var cameras: CameraSystem
 @export var backdrop: Control
@@ -49,6 +51,8 @@ func _apply_open(value: bool) -> void:
 		panel.refresh()
 	else:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if cameras.mode == "Isometrica" else _previous_mouse
+
+	open_changed.emit(is_open)
 
 func _feedback(text: String) -> void:
 	toast.text = text

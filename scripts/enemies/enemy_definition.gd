@@ -31,5 +31,6 @@ extends Resource
 @export var attack_windup: float = 0.65
 @export var stagger_duration: float = 0.35
 @export var corpse_lifetime: float = 6.0
+@export var xp_reward: int = 25
 @export_group("Debug")
 @export var show_label: bool = true

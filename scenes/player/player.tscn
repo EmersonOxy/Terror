@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=17 format=3]
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1"]
 [ext_resource type="Resource" path="res://resources/player/default.tres" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/player/placeholder.tscn" id="3"]
@@ -9,10 +9,15 @@
 [ext_resource type="Script" path="res://scripts/components/equipment_component.gd" id="equipment"]
 [ext_resource type="Script" path="res://scripts/items/item_actions.gd" id="actions"]
 [ext_resource type="Script" path="res://scripts/combat/combat_component.gd" id="combat"]
+[ext_resource type="Script" path="res://scripts/progression/progression_component.gd" id="progression"]
+[ext_resource type="Resource" path="res://resources/progression/default.tres" id="prog_config"]
+[ext_resource type="Resource" path="res://resources/progression/upgrade_vitality.tres" id="up_vit"]
+[ext_resource type="Resource" path="res://resources/progression/upgrade_conditioning.tres" id="up_con"]
+[ext_resource type="Resource" path="res://resources/progression/upgrade_backpack.tres" id="up_bag"]
 [sub_resource type="CapsuleShape3D" id="shape"]
 radius = 0.3
 height = 1.8
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("collider", "visual", "movement", "status", "interaction", "inventory", "equipment", "items", "combat")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("collider", "visual", "movement", "status", "interaction", "inventory", "equipment", "items", "combat", "progression")]
 collision_layer = 2
 collision_mask = 1
 script = ExtResource("1")
@@ -26,6 +31,7 @@ inventory = NodePath("InventoryComponent")
 equipment = NodePath("EquipmentComponent")
 items = NodePath("ItemActions")
 combat = NodePath("CombatComponent")
+progression = NodePath("ProgressionComponent")
 [node name="Collision" type="CollisionShape3D" parent="."]
 position = Vector3(0, 0.9, 0)
 shape = SubResource("shape")
@@ -54,3 +60,8 @@ actor = NodePath("..")
 equipment = NodePath("../EquipmentComponent")
 inventory = NodePath("../InventoryComponent")
 status = NodePath("../StatusComponent")
+
+[node name="ProgressionComponent" type="Node" parent="."]
+script = ExtResource("progression")
+config = ExtResource("prog_config")
+upgrades = [ExtResource("up_vit"), ExtResource("up_con"), ExtResource("up_bag")]

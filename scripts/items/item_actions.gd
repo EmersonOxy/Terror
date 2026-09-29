@@ -3,6 +3,7 @@ extends Node
 
 signal feedback(message: String)
 signal item_used(definition: ItemDefinition)
+signal item_collected(definition: ItemDefinition, quantity: int)
 @export var inventory: InventoryComponent
 @export var equipment: EquipmentComponent
 @export var status: StatusComponent
@@ -15,6 +16,8 @@ func collect(item: ItemInstance) -> int:
 	if status.dead:
 		return 0
 	var count := inventory.add_item(item)
+	if count > 0:
+		item_collected.emit(item.definition, count)
 	feedback.emit("Coletado: %d. Restante: %d" % [count, item.quantity] if count > 0 else "Inventário cheio")
 	return count
 

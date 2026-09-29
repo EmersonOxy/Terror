@@ -11,6 +11,7 @@ extends CharacterBody3D
 @export var equipment: EquipmentComponent
 @export var items: ItemActions
 @export var combat: CombatComponent
+@export var progression: ProgressionComponent
 var aim_provider: AimProvider
 var combat_aim: AimSample
 var controls_locked: bool = false

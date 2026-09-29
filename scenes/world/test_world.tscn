@@ -7,9 +7,16 @@
 [ext_resource type="PackedScene" path="res://scenes/enemies/enemy_test_area.tscn" id="enemy_area"]
 [ext_resource type="Script" uid="uid://pmbp4ensnbaj" path="res://scripts/ui/debug_hud.gd" id="hud"]
 [ext_resource type="Script" uid="uid://csij67151sy62" path="res://scripts/interactions/test_interactable.gd" id="interaction"]
+[ext_resource type="PackedScene" path="res://scenes/ui/inventory_ui.tscn" id="inventory_ui"]
+[ext_resource type="PackedScene" path="res://scenes/items/item_test_sector.tscn" id="items"]
+[ext_resource type="PackedScene" path="res://scenes/narrative/narrative_test_area.tscn" id="narrative_area"]
 [ext_resource type="NavigationMesh" path="res://resources/navigation/test_world.tres" id="navigation"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="player"]
 [ext_resource type="Script" uid="uid://dbq0gdfmcagww" path="res://scripts/world/test_world.gd" id="world"]
+[ext_resource type="Script" path="res://scripts/progression/progression_reward.gd" id="prog_reward"]
+[ext_resource type="PackedScene" path="res://scenes/ui/progression_ui.tscn" id="prog_ui"]
+[ext_resource type="PackedScene" path="res://scenes/ui/progression_hud.tscn" id="prog_hud"]
+[ext_resource type="Script" path="res://scripts/progression/progression_test_objective.gd" id="prog_obj"]
 
 [sub_resource type="BoxShape3D" id="b1s"]
 size = Vector3(30, 0.5, 30)
@@ -216,11 +223,13 @@ ambient_light_source = 3
 ambient_light_color = Color(0.8, 0.85, 1, 1)
 ambient_light_energy = 0.7
 
-[node name="TestWorld" type="Node3D" unique_id=86126591 node_paths=PackedStringArray("player", "cameras", "aim")]
+[node name="TestWorld" type="Node3D" unique_id=86126591 node_paths=PackedStringArray("player", "cameras", "aim", "inventory_ui", "progression_ui")]
 script = ExtResource("world")
 player = NodePath("Player")
 cameras = NodePath("CameraSystem")
 aim = NodePath("AimProvider")
+inventory_ui = NodePath("InventoryUI")
+progression_ui = NodePath("ProgressionUI")
 
 [node name="Geometry" type="Node3D" parent="." unique_id=1032168028]
 
@@ -564,8 +573,9 @@ offset_bottom = 690.0
 theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 
-[node name="ItemTestSector" parent="." instance=ExtResource("items")]
-[node name="InventoryUI" parent="." node_paths=PackedStringArray("player", "cameras") instance=ExtResource("inventory_ui")]
+[node name="ItemTestSector" parent="." unique_id=1648189135 instance=ExtResource("items")]
+
+[node name="InventoryUI" parent="." unique_id=1503176317 node_paths=PackedStringArray("player", "cameras") instance=ExtResource("inventory_ui")]
 player = NodePath("../Player")
 cameras = NodePath("../CameraSystem")
 
@@ -579,8 +589,51 @@ player = NodePath("../Player")
 
 [node name="CombatTestSector" parent="." unique_id=544695731 instance=ExtResource("combat_sector")]
 
-[node name="EnemyTestArea" parent="." unique_id=391468334 node_paths=PackedStringArray("player") instance=ExtResource("enemy_area")]
+[node name="EnemyTestArea" parent="." unique_id=391468334 node_paths=PackedStringArray("player", "progression_reward") instance=ExtResource("enemy_area")]
 player = NodePath("../Player")
+progression_reward = NodePath("../ProgressionReward")
 
 [node name="NavigationRegion" type="NavigationRegion3D" parent="." unique_id=2058723178]
 navigation_mesh = ExtResource("navigation")
+
+[node name="NarrativeTestArea" parent="." unique_id=226768186 node_paths=PackedStringArray("player", "inventory_ui", "enemies", "prompt", "combat_hud") instance=ExtResource("narrative_area")]
+player = NodePath("../Player")
+inventory_ui = NodePath("../InventoryUI")
+enemies = [NodePath("../EnemyTestArea/PatrollerA"), NodePath("../EnemyTestArea/PatrollerB"), NodePath("../EnemyTestArea/Sentry")]
+prompt = NodePath("../DebugHUD/Prompt")
+combat_hud = NodePath("../CombatHUD")
+
+[node name="ProgressionReward" type="Node" parent="." node_paths=PackedStringArray("progression")]
+script = ExtResource("prog_reward")
+progression = NodePath("../Player/ProgressionComponent")
+
+[node name="ProgressionUI" parent="." node_paths=PackedStringArray("player", "cameras", "progression") instance=ExtResource("prog_ui")]
+player = NodePath("../Player")
+cameras = NodePath("../CameraSystem")
+progression = NodePath("../Player/ProgressionComponent")
+
+[node name="ProgressionHUD" parent="." node_paths=PackedStringArray("progression") instance=ExtResource("prog_hud")]
+progression = NodePath("../Player/ProgressionComponent")
+
+[node name="ProgressionTestObjective" type="Area3D" parent="." node_paths=PackedStringArray("indicator", "reward")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.75, 4)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("prog_obj")
+objective_id = &"test_objective"
+xp_reward = 80
+indicator = NodePath("Mesh")
+reward = NodePath("../ProgressionReward")
+
+[node name="Collision" type="CollisionShape3D" parent="ProgressionTestObjective"]
+shape = SubResource("i2s")
+
+[node name="Mesh" type="MeshInstance3D" parent="ProgressionTestObjective"]
+material_override = SubResource("i2c")
+mesh = SubResource("i2m")
+
+[node name="Label" type="Label3D" parent="ProgressionTestObjective"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+billboard = 1
+text = "OBJETIVO XP"
+font_size = 36

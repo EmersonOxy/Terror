@@ -1,0 +1,67 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://scripts/narrative/narrative_director.gd" id="director"]
+[ext_resource type="Script" path="res://scripts/narrative/narrative_system.gd" id="system"]
+[ext_resource type="Script" path="res://scripts/narrative/narrative_area_trigger.gd" id="trigger"]
+[ext_resource type="Script" path="res://scripts/narrative/dialogue_dummy.gd" id="dummy"]
+[ext_resource type="Script" path="res://scripts/ui/subtitle_ui.gd" id="ui"]
+[ext_resource type="Resource" path="res://resources/dialogue/events/default_profile.tres" id="profile"]
+[ext_resource type="Resource" path="res://resources/dialogue/npc/survivor.tres" id="conversation"]
+[sub_resource type="BoxShape3D" id="area_shape"]
+size = Vector3(2.6, 2.5, 2)
+[sub_resource type="BoxShape3D" id="encounter_shape"]
+size = Vector3(4, 2.5, 2)
+[sub_resource type="CapsuleShape3D" id="dummy_shape"]
+radius = 0.35
+height = 1.8
+[sub_resource type="CapsuleMesh" id="dummy_mesh"]
+radius = 0.35
+height = 1.8
+[sub_resource type="StandardMaterial3D" id="material"]
+albedo_color = Color(0.32, 0.47, 0.46, 1)
+[node name="NarrativeTestArea" type="Node3D" node_paths=PackedStringArray("narrative", "triggers", "dummy", "subtitles")]
+script = ExtResource("director")
+narrative = NodePath("NarrativeSystem")
+triggers = [NodePath("CorridorTrigger"), NodePath("EncounterTrigger")]
+dummy = NodePath("DialogueDummy")
+subtitles = NodePath("Subtitles")
+pickup_item_id = &"ranged"
+[node name="NarrativeSystem" type="Node" parent="."]
+script = ExtResource("system")
+profile = ExtResource("profile")
+[node name="Subtitles" type="CanvasLayer" parent="." node_paths=PackedStringArray("narrative")]
+script = ExtResource("ui")
+narrative = NodePath("../NarrativeSystem")
+[node name="CorridorTrigger" type="Area3D" parent="."]
+position = Vector3(9.5, 1.25, 6)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("trigger")
+narrative_event_id = &"test_area_enter"
+[node name="Collision" type="CollisionShape3D" parent="CorridorTrigger"]
+shape = SubResource("area_shape")
+[node name="EncounterTrigger" type="Area3D" parent="."]
+position = Vector3(0, 1.25, -16)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("trigger")
+narrative_event_id = &"test_enemy_first_encounter"
+[node name="Collision" type="CollisionShape3D" parent="EncounterTrigger"]
+shape = SubResource("encounter_shape")
+[node name="DialogueDummy" type="Area3D" parent="."]
+position = Vector3(6, 0.9, 10)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("dummy")
+sequence = ExtResource("conversation")
+prompt = "Conversar · Espaço para continuar"
+[node name="Collision" type="CollisionShape3D" parent="DialogueDummy"]
+shape = SubResource("dummy_shape")
+[node name="Visual" type="MeshInstance3D" parent="DialogueDummy"]
+mesh = SubResource("dummy_mesh")
+material_override = SubResource("material")
+[node name="Label" type="Label3D" parent="DialogueDummy"]
+position = Vector3(0, 1.3, 0)
+text = "SOBREVIVENTE / E conversar"
+billboard = 1
+font_size = 28
+pixel_size = 0.009

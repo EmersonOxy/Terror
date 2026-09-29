@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="UpgradeDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://scripts/progression/upgrade_definition.gd" id="script"]
+[resource]
+script = ExtResource("script")
+id = &"backpack"
+display_name = "Mochila"
+description = "+1 Slot de inventário por rank"
+max_rank = 4
+value_per_rank = 1.0

@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="NarrativeProfile" format=3 uid="uid://e7ux3tqt0ene"]
+
+[ext_resource type="Resource" uid="uid://b0p4o7w00kjha" path="res://resources/dialogue/player/area.tres" id="area"]
+[ext_resource type="Resource" uid="uid://tgdapimls46g" path="res://resources/dialogue/player/damage.tres" id="damage"]
+[ext_resource type="Resource" uid="uid://d15yxy0hnhxs2" path="res://resources/dialogue/player/encounter.tres" id="encounter"]
+[ext_resource type="Script" uid="uid://dda7gb6ykwy21" path="res://scripts/narrative/narrative_event.gd" id="event"]
+[ext_resource type="Resource" uid="uid://4mepf0oyi821" path="res://resources/dialogue/player/kill.tres" id="kill"]
+[ext_resource type="Resource" uid="uid://cf6jmbvnstqe5" path="res://resources/dialogue/player/pickup.tres" id="pickup"]
+[ext_resource type="Script" uid="uid://c74o72tslyggd" path="res://scripts/narrative/narrative_profile.gd" id="profile"]
+
+[sub_resource type="Resource" id="area_event"]
+script = ExtResource("event")
+event_id = &"test_area_enter"
+sequence = ExtResource("area")
+cooldown = 4
+
+[sub_resource type="Resource" id="encounter_event"]
+script = ExtResource("event")
+event_id = &"test_enemy_first_encounter"
+sequence = ExtResource("encounter")
+once_per_session = true
+
+[sub_resource type="Resource" id="kill_event"]
+script = ExtResource("event")
+event_id = &"test_enemy_killed"
+sequence = ExtResource("kill")
+cooldown = 10
+
+[sub_resource type="Resource" id="damage_event"]
+script = ExtResource("event")
+event_id = &"test_player_damaged"
+sequence = ExtResource("damage")
+once_per_session = true
+
+[sub_resource type="Resource" id="pickup_event"]
+script = ExtResource("event")
+event_id = &"test_weapon_pickup"
+sequence = ExtResource("pickup")
+once_per_session = true
+
+[resource]
+script = ExtResource("profile")
+events = Array[ExtResource("event")]([SubResource("area_event"), SubResource("encounter_event"), SubResource("kill_event"), SubResource("damage_event"), SubResource("pickup_event")])

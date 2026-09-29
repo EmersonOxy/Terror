@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="DialogueSequence" format=3 uid="uid://c1p02w71gmbv5"]
+
+[ext_resource type="Script" uid="uid://iu873trj1imm" path="res://scripts/narrative/dialogue_line.gd" id="line"]
+[ext_resource type="Script" uid="uid://b7t2iuicshta2" path="res://scripts/narrative/dialogue_sequence.gd" id="sequence"]
+
+[sub_resource type="Resource" id="first"]
+script = ExtResource("line")
+speaker_id = &"survivor"
+speaker_name = "SOBREVIVENTE"
+text = "Você também está preso aqui?"
+
+[sub_resource type="Resource" id="second"]
+script = ExtResource("line")
+speaker_id = &"player_default"
+speaker_name = "ÉMERSON"
+text = "Parece que sim."
+
+[sub_resource type="Resource" id="third"]
+script = ExtResource("line")
+speaker_id = &"survivor"
+speaker_name = "SOBREVIVENTE"
+text = "Então não faça barulho."
+
+[resource]
+script = ExtResource("sequence")
+sequence_id = &"test_survivor_conversation"
+lines = Array[ExtResource("line")]([SubResource("first"), SubResource("second"), SubResource("third")])
+priority = 2
+interruptible = false
+interactive = true
