@@ -14,10 +14,15 @@
 [ext_resource type="Resource" path="res://resources/progression/upgrade_vitality.tres" id="up_vit"]
 [ext_resource type="Resource" path="res://resources/progression/upgrade_conditioning.tres" id="up_con"]
 [ext_resource type="Resource" path="res://resources/progression/upgrade_backpack.tres" id="up_bag"]
+[ext_resource type="Script" path="res://scripts/components/player_modifiers.gd" id="modifiers_script"]
+[ext_resource type="Script" path="res://scripts/components/build_resolver.gd" id="resolver_script"]
+[ext_resource type="Resource" path="res://resources/items/build_heavy.tres" id="b_heavy"]
+[ext_resource type="Resource" path="res://resources/items/build_medium.tres" id="b_medium"]
+[ext_resource type="Resource" path="res://resources/items/build_light.tres" id="b_light"]
 [sub_resource type="CapsuleShape3D" id="shape"]
 radius = 0.3
 height = 1.8
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("collider", "visual", "movement", "status", "interaction", "inventory", "equipment", "items", "combat", "progression")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("collider", "visual", "movement", "status", "interaction", "inventory", "equipment", "items", "modifiers", "build_resolver", "combat", "progression")]
 collision_layer = 2
 collision_mask = 1
 script = ExtResource("1")
@@ -30,16 +35,20 @@ interaction = NodePath("InteractionComponent")
 inventory = NodePath("InventoryComponent")
 equipment = NodePath("EquipmentComponent")
 items = NodePath("ItemActions")
+modifiers = NodePath("PlayerModifiers")
+build_resolver = NodePath("BuildResolver")
 combat = NodePath("CombatComponent")
 progression = NodePath("ProgressionComponent")
 [node name="Collision" type="CollisionShape3D" parent="."]
 position = Vector3(0, 0.9, 0)
 shape = SubResource("shape")
 [node name="Visual" parent="." instance=ExtResource("3")]
-[node name="MovementComponent" type="Node" parent="."]
+[node name="MovementComponent" type="Node" parent="." node_paths=PackedStringArray("modifiers")]
 script = ExtResource("4")
-[node name="StatusComponent" type="Node" parent="."]
+modifiers = NodePath("../PlayerModifiers")
+[node name="StatusComponent" type="Node" parent="." node_paths=PackedStringArray("modifiers")]
 script = ExtResource("5")
+modifiers = NodePath("../PlayerModifiers")
 [node name="InteractionComponent" type="Node" parent="."]
 script = ExtResource("6")
 [node name="InventoryComponent" type="Node" parent="."]
@@ -54,14 +63,24 @@ equipment = NodePath("../EquipmentComponent")
 status = NodePath("../StatusComponent")
 actor = NodePath("..")
 
-[node name="CombatComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "equipment", "inventory", "status")]
+[node name="CombatComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "equipment", "inventory", "status", "modifiers")]
 script = ExtResource("combat")
 actor = NodePath("..")
 equipment = NodePath("../EquipmentComponent")
 inventory = NodePath("../InventoryComponent")
 status = NodePath("../StatusComponent")
+modifiers = NodePath("../PlayerModifiers")
 
 [node name="ProgressionComponent" type="Node" parent="."]
 script = ExtResource("progression")
 config = ExtResource("prog_config")
 upgrades = [ExtResource("up_vit"), ExtResource("up_con"), ExtResource("up_bag")]
+
+[node name="PlayerModifiers" type="Node" parent="."]
+script = ExtResource("modifiers_script")
+
+[node name="BuildResolver" type="Node" parent="." node_paths=PackedStringArray("equipment", "modifiers")]
+script = ExtResource("resolver_script")
+equipment = NodePath("../EquipmentComponent")
+modifiers = NodePath("../PlayerModifiers")
+build_definitions = [ExtResource("b_heavy"), ExtResource("b_medium"), ExtResource("b_light")]

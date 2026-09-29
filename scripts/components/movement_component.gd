@@ -2,6 +2,8 @@ class_name MovementComponent
 extends Node
 
 var config: PlayerConfig
+@export var modifiers: PlayerModifiers
+
 var body: CharacterBody3D
 var collider: CollisionShape3D
 var crouched: bool = false
@@ -32,7 +34,8 @@ func tick(delta: float, direction: Vector3, wants_crouch: bool, wants_sprint: bo
 		direction = Vector3.ZERO
 	sprinting = alive and wants_sprint and not crouched and direction.length_squared() > 0.01
 	var speed := config.crouch_speed if crouched else (config.sprint_speed if sprinting else config.walk_speed)
-	var target := direction * speed
+	var mult := modifiers.get_mult(ModifierDefinition.Stat.MOVE_SPEED_MULT) if modifiers else 1.0
+	var target := direction * (speed * mult)
 	var rate := config.acceleration if direction.length_squared() > 0.01 else config.deceleration
 	var horizontal := Vector3(body.velocity.x, 0.0, body.velocity.z)
 	if horizontal.dot(target) < 0.0:

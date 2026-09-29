@@ -17,6 +17,10 @@ func _ready() -> void:
 	panel.setup(player.items)
 	backdrop.hide()
 	player.items.feedback.connect(_feedback)
+	if is_instance_valid(player.build_resolver):
+		player.build_resolver.build_changed.connect(func(): if is_open: panel.refresh())
+		player.build_resolver.build_activated.connect(func(id: StringName): _feedback("Sinergia %s ativa" % id.capitalize()))
+		player.build_resolver.build_deactivated.connect(func(_id: StringName): _feedback("Sinergia perdida"))
 
 func _input(event: InputEvent) -> void:
 	if event.is_action("inventory_hold") and not event.is_echo():

@@ -1,0 +1,91 @@
+[gd_scene load_steps=14 format=3]
+[ext_resource type="PackedScene" path="res://scenes/items/item_pickup.tscn" id="pickup"]
+[ext_resource type="Script" path="res://scripts/items/item_instance.gd" id="instance"]
+[ext_resource type="Script" path="res://scripts/combat/weapon_instance.gd" id="weapon_instance"]
+[ext_resource type="Resource" path="res://resources/items/heavy_head.tres" id="heavy_head"]
+[ext_resource type="Resource" path="res://resources/items/heavy_body.tres" id="heavy_body"]
+[ext_resource type="Resource" path="res://resources/items/heavy_weapon.tres" id="heavy_weapon"]
+[ext_resource type="Resource" path="res://resources/items/medium_head.tres" id="medium_head"]
+[ext_resource type="Resource" path="res://resources/items/medium_body.tres" id="medium_body"]
+[ext_resource type="Resource" path="res://resources/items/medium_weapon.tres" id="medium_weapon"]
+[ext_resource type="Resource" path="res://resources/items/light_head.tres" id="light_head"]
+[ext_resource type="Resource" path="res://resources/items/light_body.tres" id="light_body"]
+[ext_resource type="Resource" path="res://resources/items/light_weapon.tres" id="light_weapon"]
+
+[sub_resource type="Resource" id="i_hh"]
+script = ExtResource("instance")
+definition = ExtResource("heavy_head")
+quantity = 1
+[sub_resource type="Resource" id="i_hb"]
+script = ExtResource("instance")
+definition = ExtResource("heavy_body")
+quantity = 1
+[sub_resource type="Resource" id="i_hw"]
+script = ExtResource("weapon_instance")
+definition = ExtResource("heavy_weapon")
+quantity = 1
+
+[sub_resource type="Resource" id="i_mh"]
+script = ExtResource("instance")
+definition = ExtResource("medium_head")
+quantity = 1
+[sub_resource type="Resource" id="i_mb"]
+script = ExtResource("instance")
+definition = ExtResource("medium_body")
+quantity = 1
+[sub_resource type="Resource" id="i_mw"]
+script = ExtResource("weapon_instance")
+definition = ExtResource("medium_weapon")
+quantity = 1
+
+[sub_resource type="Resource" id="i_lh"]
+script = ExtResource("instance")
+definition = ExtResource("light_head")
+quantity = 1
+[sub_resource type="Resource" id="i_lb"]
+script = ExtResource("instance")
+definition = ExtResource("light_body")
+quantity = 1
+[sub_resource type="Resource" id="i_lw"]
+script = ExtResource("weapon_instance")
+ammo_in_magazine = 6
+definition = ExtResource("light_weapon")
+quantity = 1
+
+[node name="BuildTestSector" type="Node3D"]
+[node name="Label" type="Label3D" parent="."]
+position = Vector3(0, 1.0, 0)
+text = "BUILD TEST\nHeavy | Medium | Light"
+billboard = 1
+font_size = 36
+pixel_size = 0.01
+
+[node name="HeavyHead" parent="." instance=ExtResource("pickup")]
+position = Vector3(-2, 0.185, 2)
+item = SubResource("i_hh")
+[node name="HeavyBody" parent="." instance=ExtResource("pickup")]
+position = Vector3(-2, 0.185, 3)
+item = SubResource("i_hb")
+[node name="HeavyWeapon" parent="." instance=ExtResource("pickup")]
+position = Vector3(-2, 0.185, 4)
+item = SubResource("i_hw")
+
+[node name="MediumHead" parent="." instance=ExtResource("pickup")]
+position = Vector3(0, 0.185, 2)
+item = SubResource("i_mh")
+[node name="MediumBody" parent="." instance=ExtResource("pickup")]
+position = Vector3(0, 0.185, 3)
+item = SubResource("i_mb")
+[node name="MediumWeapon" parent="." instance=ExtResource("pickup")]
+position = Vector3(0, 0.185, 4)
+item = SubResource("i_mw")
+
+[node name="LightHead" parent="." instance=ExtResource("pickup")]
+position = Vector3(2, 0.185, 2)
+item = SubResource("i_lh")
+[node name="LightBody" parent="." instance=ExtResource("pickup")]
+position = Vector3(2, 0.185, 3)
+item = SubResource("i_lb")
+[node name="LightWeapon" parent="." instance=ExtResource("pickup")]
+position = Vector3(2, 0.185, 4)
+item = SubResource("i_lw")

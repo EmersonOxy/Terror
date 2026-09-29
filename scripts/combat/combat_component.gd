@@ -7,6 +7,8 @@ signal hit_confirmed
 @export var equipment: EquipmentComponent
 @export var inventory: InventoryComponent
 @export var status: StatusComponent
+@export var modifiers: PlayerModifiers
+
 var cooldown: float = 0.0
 var reload_remaining: float = 0.0
 var _reloading: WeaponInstance
@@ -125,6 +127,10 @@ func _melee(data: WeaponDefinition, aim: AimSample) -> void:
 			_damage(target, data, line.position, forward)
 
 func _damage(target: Object, data: WeaponDefinition, position: Vector3, direction: Vector3) -> void:
-	if target.has_method("take_damage") and target.take_damage(DamageData.new(data.damage, actor, position, direction)):
+	var mult := 1.0
+	if modifiers:
+		mult = modifiers.get_mult(ModifierDefinition.Stat.MELEE_DAMAGE_MULT) if data.weapon_type == WeaponDefinition.WeaponType.MELEE else modifiers.get_mult(ModifierDefinition.Stat.RANGED_DAMAGE_MULT)
+	var final_damage := data.damage * mult
+	if target.has_method("take_damage") and target.take_damage(DamageData.new(final_damage, actor, position, direction)):
 		hit_confirmed.emit()
-		feedback.emit("Acerto: %.0f" % data.damage)
+		feedback.emit("Acerto: %.0f" % final_damage)

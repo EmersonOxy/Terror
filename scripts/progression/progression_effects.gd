@@ -23,16 +23,12 @@ static func apply(upgrade_id: StringName, value: float, status: StatusComponent,
 ## 50/100 + 5 → 55/105, 100/100 + 5 → 105/105.
 static func _increase_max_health(status: StatusComponent, amount: float) -> void:
 	status.config.max_health += amount
-	if not status.dead:
-		status.health = minf(status.health + amount, status.config.max_health)
-	status.health_changed.emit(status.health, status.config.max_health)
+	status._on_modifiers_changed()
 
 ## Increases max stamina and current stamina by the same amount.
 static func _increase_max_stamina(status: StatusComponent, amount: float) -> void:
 	status.config.max_stamina += amount
-	if not status.dead:
-		status.stamina = minf(status.stamina + amount, status.config.max_stamina)
-	status.stamina_changed.emit(status.stamina, status.config.max_stamina)
+	status._on_modifiers_changed()
 
 ## Increases inventory capacity by amount (int slots).
 static func _increase_capacity(inventory: InventoryComponent, amount: int) -> void:

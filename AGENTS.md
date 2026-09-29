@@ -26,3 +26,5 @@ Comandos (na raiz; Godot via GODOT_BIN, PATH ou instalação local detectada):
 - Combate: WeaponDefinition cria WeaponInstance; carregador pertence à instância, reserva ao Inventory. CombatComponent recebe AimSample e não conhece câmeras ou classes de alvo. CameraAimProvider adapta a câmera no composition root. Dano usa take_damage(DamageData), com origem física no ator para respeitar cobertura. Novos alvos implementam o contrato sem alterar armas.
 
 - Enemy: dados em EnemyDefinition; componentes separados para percepção/motor/ataque/visual. HealthComponent compartilha vida de Enemy e DamageReceiver; Player mantém Status. IA recebe candidato explicitamente e nunca conhece câmera/textos. Navmesh salva exige novo bake ao editar geometria estática (tools/bake_navigation.gd); colisão e step_height precisam ser compatíveis. player_detected é visão do inimigo, nunca prova de que o Player o viu.
+
+- Progression e Equipment Build são sistemas independentes. Itens sempre mantêm seus efeitos individuais mesmo sem uma build completa.

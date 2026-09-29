@@ -10,6 +10,8 @@ extends CharacterBody3D
 @export var inventory: InventoryComponent
 @export var equipment: EquipmentComponent
 @export var items: ItemActions
+@export var modifiers: PlayerModifiers
+@export var build_resolver: BuildResolver
 @export var combat: CombatComponent
 @export var progression: ProgressionComponent
 var aim_provider: AimProvider

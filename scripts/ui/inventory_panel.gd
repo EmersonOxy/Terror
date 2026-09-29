@@ -8,6 +8,7 @@ var slot_buttons: Array[Button] = []
 var equip_buttons: Dictionary = {}
 var grid: GridContainer
 var capacity_label: Label
+var synergy_label: Label
 var details: Label
 var message: Label
 var use_button: Button
@@ -40,6 +41,9 @@ func setup(controller: ItemActions) -> void:
 	title.text = "INVENTÁRIO    TAB segurar · I fixar"
 	title.add_theme_font_size_override("font_size", 17)
 	column.add_child(title)
+	synergy_label = Label.new()
+	synergy_label.add_theme_color_override("font_color", Color(0.8, 0.7, 0.4))
+	column.add_child(synergy_label)
 	var equipment := HBoxContainer.new()
 	equipment.add_theme_constant_override("separation", 8)
 	column.add_child(equipment)
@@ -116,9 +120,15 @@ func refresh() -> void:
 		var item := actions.inventory.get_slot(i)
 		slot_buttons[i].text = "%d · %s" % [i + 1, item_text(item)]
 		slot_buttons[i].modulate = Color(0.7, 0.85, 0.8) if selected_index == i else Color.WHITE
+	var b_resolver = actions.actor.build_resolver if actions.actor and "build_resolver" in actions.actor else null
+	var synergy_name: String = String(b_resolver.active_build.display_name) if (b_resolver and b_resolver.active_build) else "INATIVA"
+	synergy_label.text = "SINERGIA: " + synergy_name
+	
 	for slot in EquipmentComponent.SLOTS:
-		var equipped_text := item_text(actions.equipment.get_equipped(slot))
-		equip_buttons[slot].text = ItemDefinition.EquipSlot.keys()[slot] + "\n" + (equipped_text.left(12) + "…" if equipped_text.length() > 13 else equipped_text)
+		var item := actions.equipment.get_equipped(slot)
+		var equipped_text := item_text(item)
+		var weight := ("[%s] " % ItemDefinition.WeightClass.keys()[item.definition.weight_class]) if item else ""
+		equip_buttons[slot].text = ItemDefinition.EquipSlot.keys()[slot] + "\n" + weight + (equipped_text.left(12) + "…" if equipped_text.length() > 13 else equipped_text)
 		equip_buttons[slot].tooltip_text = equipped_text
 		equip_buttons[slot].modulate = Color(0.7, 0.85, 0.8) if selected_equipment == slot else Color.WHITE
 	var item := actions.equipment.get_equipped(selected_equipment) if selected_equipment != ItemDefinition.EquipSlot.NONE else actions.inventory.get_slot(selected_index)

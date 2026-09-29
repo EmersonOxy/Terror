@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/progression_ui.tscn" id="prog_ui"]
 [ext_resource type="PackedScene" path="res://scenes/ui/progression_hud.tscn" id="prog_hud"]
 [ext_resource type="Script" path="res://scripts/progression/progression_test_objective.gd" id="prog_obj"]
+[ext_resource type="PackedScene" path="res://scenes/items/build_test_sector.tscn" id="build_sector"]
 
 [sub_resource type="BoxShape3D" id="b1s"]
 size = Vector3(30, 0.5, 30)
@@ -574,6 +575,9 @@ theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 
 [node name="ItemTestSector" parent="." unique_id=1648189135 instance=ExtResource("items")]
+
+[node name="BuildTestSector" parent="." instance=ExtResource("build_sector")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
 
 [node name="InventoryUI" parent="." unique_id=1503176317 node_paths=PackedStringArray("player", "cameras") instance=ExtResource("inventory_ui")]
 player = NodePath("../Player")
