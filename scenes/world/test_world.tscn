@@ -1,17 +1,16 @@
 [gd_scene format=3 uid="uid://dm7lclr7lq0c3"]
 
+[ext_resource type="Script" uid="uid://ckgxr0l0rxxnr" path="res://scripts/camera/camera_aim_provider.gd" id="aim"]
 [ext_resource type="PackedScene" path="res://scenes/world/camera_system.tscn" id="camera"]
+[ext_resource type="Script" uid="uid://rklmef8v205g" path="res://scripts/ui/combat_hud.gd" id="combat_hud"]
+[ext_resource type="PackedScene" path="res://scenes/combat/combat_test_sector.tscn" id="combat_sector"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/enemy_test_area.tscn" id="enemy_area"]
 [ext_resource type="Script" uid="uid://pmbp4ensnbaj" path="res://scripts/ui/debug_hud.gd" id="hud"]
 [ext_resource type="Script" uid="uid://csij67151sy62" path="res://scripts/interactions/test_interactable.gd" id="interaction"]
+[ext_resource type="NavigationMesh" path="res://resources/navigation/test_world.tres" id="navigation"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="player"]
 [ext_resource type="Script" uid="uid://dbq0gdfmcagww" path="res://scripts/world/test_world.gd" id="world"]
 
-[ext_resource type="PackedScene" path="res://scenes/items/item_test_sector.tscn" id="items"]
-[ext_resource type="PackedScene" path="res://scenes/ui/inventory_ui.tscn" id="inventory_ui"]
-
-[ext_resource type="Script" path="res://scripts/camera/camera_aim_provider.gd" id="aim"]
-[ext_resource type="Script" path="res://scripts/ui/combat_hud.gd" id="combat_hud"]
-[ext_resource type="PackedScene" path="res://scenes/combat/combat_test_sector.tscn" id="combat_sector"]
 [sub_resource type="BoxShape3D" id="b1s"]
 size = Vector3(30, 0.5, 30)
 
@@ -22,13 +21,13 @@ albedo_color = Color(0.27, 0.29, 0.32, 1)
 size = Vector3(30, 0.5, 30)
 
 [sub_resource type="BoxShape3D" id="b2s"]
-size = Vector3(30, 1, 0.3)
+size = Vector3(13, 1, 0.3)
 
 [sub_resource type="StandardMaterial3D" id="b2c"]
 albedo_color = Color(0.43, 0.46, 0.49, 1)
 
 [sub_resource type="BoxMesh" id="b2m"]
-size = Vector3(30, 1, 0.3)
+size = Vector3(13, 1, 0.3)
 
 [sub_resource type="BoxShape3D" id="b3s"]
 size = Vector3(30, 1, 0.3)
@@ -219,9 +218,9 @@ ambient_light_energy = 0.7
 
 [node name="TestWorld" type="Node3D" unique_id=86126591 node_paths=PackedStringArray("player", "cameras", "aim")]
 script = ExtResource("world")
-aim = NodePath("AimProvider")
 player = NodePath("Player")
 cameras = NodePath("CameraSystem")
+aim = NodePath("AimProvider")
 
 [node name="Geometry" type="Node3D" parent="." unique_id=1032168028]
 
@@ -236,7 +235,7 @@ material_override = SubResource("b1c")
 mesh = SubResource("b1m")
 
 [node name="BoundaryNorth" type="StaticBody3D" parent="Geometry" unique_id=544389171 groups=["camera_occluder"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -15)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 0.5, -15)
 
 [node name="Collision" type="CollisionShape3D" parent="Geometry/BoundaryNorth" unique_id=315404877]
 shape = SubResource("b2s")
@@ -450,6 +449,16 @@ billboard = 1
 text = "OBSTACULO CAMERA"
 font_size = 44
 
+[node name="BoundaryNorthEast" type="StaticBody3D" parent="Geometry" unique_id=1264561337 groups=["camera_occluder"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0.5, -15)
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/BoundaryNorthEast" unique_id=2069815194]
+shape = SubResource("b2s")
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/BoundaryNorthEast" unique_id=819366570]
+material_override = SubResource("b2c")
+mesh = SubResource("b2m")
+
 [node name="InteractionTest" type="Area3D" parent="." unique_id=1669758414 node_paths=PackedStringArray("indicator")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.75, 2)
 collision_layer = 4
@@ -560,10 +569,18 @@ horizontal_alignment = 1
 player = NodePath("../Player")
 cameras = NodePath("../CameraSystem")
 
-[node name="AimProvider" type="Node" parent="." node_paths=PackedStringArray("actor")]
+[node name="AimProvider" type="Node" parent="." unique_id=2097973994 node_paths=PackedStringArray("actor")]
 script = ExtResource("aim")
 actor = NodePath("../Player")
-[node name="CombatHUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("player")]
+
+[node name="CombatHUD" type="CanvasLayer" parent="." unique_id=1823060043 node_paths=PackedStringArray("player")]
 script = ExtResource("combat_hud")
 player = NodePath("../Player")
-[node name="CombatTestSector" parent="." instance=ExtResource("combat_sector")]
+
+[node name="CombatTestSector" parent="." unique_id=544695731 instance=ExtResource("combat_sector")]
+
+[node name="EnemyTestArea" parent="." unique_id=391468334 node_paths=PackedStringArray("player") instance=ExtResource("enemy_area")]
+player = NodePath("../Player")
+
+[node name="NavigationRegion" type="NavigationRegion3D" parent="." unique_id=2058723178]
+navigation_mesh = ExtResource("navigation")

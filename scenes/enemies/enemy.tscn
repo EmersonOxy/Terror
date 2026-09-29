@@ -1,0 +1,44 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://scripts/enemies/enemy.gd" id="enemy"]
+[ext_resource type="Resource" path="res://resources/enemies/test_enemy.tres" id="config"]
+[ext_resource type="Script" path="res://scripts/enemies/enemy_motor.gd" id="motor"]
+[ext_resource type="Script" path="res://scripts/enemies/enemy_perception.gd" id="perception"]
+[ext_resource type="Script" path="res://scripts/enemies/enemy_combat.gd" id="combat"]
+[ext_resource type="Script" path="res://scripts/components/health_component.gd" id="health"]
+[ext_resource type="Script" path="res://scripts/components/movement_component.gd" id="movement"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/enemy_visual.tscn" id="visual"]
+[sub_resource type="CapsuleShape3D" id="capsule"]
+radius = 0.3
+height = 1.8
+[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("collider", "health", "motor", "perception", "combat", "visual")]
+script = ExtResource("enemy")
+definition = ExtResource("config")
+collision_layer = 9
+collision_mask = 11
+collider = NodePath("Collision")
+health = NodePath("Health")
+motor = NodePath("Motor")
+perception = NodePath("Perception")
+combat = NodePath("Combat")
+visual = NodePath("Visual")
+[node name="Collision" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.9, 0)
+shape = SubResource("capsule")
+[node name="Health" type="Node" parent="."]
+script = ExtResource("health")
+[node name="Perception" type="Node" parent="."]
+script = ExtResource("perception")
+[node name="Combat" type="Node" parent="."]
+script = ExtResource("combat")
+[node name="Motor" type="Node" parent="." node_paths=PackedStringArray("movement", "agent")]
+script = ExtResource("motor")
+movement = NodePath("../Movement")
+agent = NodePath("../NavigationAgent")
+[node name="Movement" type="Node" parent="."]
+script = ExtResource("movement")
+[node name="NavigationAgent" type="NavigationAgent3D" parent="."]
+path_desired_distance = 0.35
+target_desired_distance = 0.35
+path_max_distance = 1.5
+debug_enabled = false
+[node name="Visual" parent="." instance=ExtResource("visual")]

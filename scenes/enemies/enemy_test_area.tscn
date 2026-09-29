@@ -1,0 +1,190 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="enemy"]
+[ext_resource type="Script" path="res://scripts/world/enemy_test_area.gd" id="area"]
+[sub_resource type="StandardMaterial3D" id="floor_mat"]
+albedo_color = Color(0.3, 0.32, 0.33, 1)
+[sub_resource type="StandardMaterial3D" id="wall_mat"]
+albedo_color = Color(0.45, 0.43, 0.38, 1)
+[sub_resource type="BoxShape3D" id="Floor_shape"]
+size = Vector3(20,0.5,16)
+[sub_resource type="BoxMesh" id="Floor_mesh"]
+size = Vector3(20,0.5,16)
+[sub_resource type="BoxShape3D" id="NorthBoundary_shape"]
+size = Vector3(20,1,0.3)
+[sub_resource type="BoxMesh" id="NorthBoundary_mesh"]
+size = Vector3(20,1,0.3)
+[sub_resource type="BoxShape3D" id="WestBoundary_shape"]
+size = Vector3(0.3,1,16)
+[sub_resource type="BoxMesh" id="WestBoundary_mesh"]
+size = Vector3(0.3,1,16)
+[sub_resource type="BoxShape3D" id="EastBoundary_shape"]
+size = Vector3(0.3,1,16)
+[sub_resource type="BoxMesh" id="EastBoundary_mesh"]
+size = Vector3(0.3,1,16)
+[sub_resource type="BoxShape3D" id="Cover_shape"]
+size = Vector3(0.4,2.5,5)
+[sub_resource type="BoxMesh" id="Cover_mesh"]
+size = Vector3(0.4,2.5,5)
+[sub_resource type="BoxShape3D" id="CorridorWest_shape"]
+size = Vector3(0.3,2.5,6)
+[sub_resource type="BoxMesh" id="CorridorWest_mesh"]
+size = Vector3(0.3,2.5,6)
+[sub_resource type="BoxShape3D" id="CorridorEast_shape"]
+size = Vector3(0.3,2.5,6)
+[sub_resource type="BoxMesh" id="CorridorEast_mesh"]
+size = Vector3(0.3,2.5,6)
+[sub_resource type="BoxShape3D" id="Step1_shape"]
+size = Vector3(2,0.24,0.65)
+[sub_resource type="BoxMesh" id="Step1_mesh"]
+size = Vector3(2,0.24,0.65)
+[sub_resource type="BoxShape3D" id="Step2_shape"]
+size = Vector3(2,0.48,0.65)
+[sub_resource type="BoxMesh" id="Step2_mesh"]
+size = Vector3(2,0.48,0.65)
+[sub_resource type="BoxShape3D" id="Step3_shape"]
+size = Vector3(2,0.72,0.65)
+[sub_resource type="BoxMesh" id="Step3_mesh"]
+size = Vector3(2,0.72,0.65)
+[sub_resource type="BoxShape3D" id="Landing_shape"]
+size = Vector3(2,0.72,2.1)
+[sub_resource type="BoxMesh" id="Landing_mesh"]
+size = Vector3(2,0.72,2.1)
+[sub_resource type="BoxShape3D" id="Ramp_shape"]
+size = Vector3(2,0.2,4)
+[sub_resource type="BoxMesh" id="Ramp_mesh"]
+size = Vector3(2,0.2,4)
+[node name="EnemyTestArea" type="Node3D" node_paths=PackedStringArray("enemies")]
+script = ExtResource("area")
+enemies = [NodePath("PatrollerA"), NodePath("PatrollerB"), NodePath("Sentry")]
+[node name="Geometry" type="Node3D" parent="."]
+[node name="Floor" type="StaticBody3D" parent="Geometry"]
+position = Vector3(0,-0.25,-23)
+rotation = Vector3(0, 0, 0)
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Floor"]
+shape = SubResource("Floor_shape")
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Floor"]
+mesh = SubResource("Floor_mesh")
+material_override = SubResource("floor_mat")
+[node name="NorthBoundary" type="StaticBody3D" parent="Geometry" groups=["camera_occluder"]]
+position = Vector3(0,0.5,-31)
+rotation = Vector3(0, 0, 0)
+[node name="Collision" type="CollisionShape3D" parent="Geometry/NorthBoundary"]
+shape = SubResource("NorthBoundary_shape")
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/NorthBoundary"]
+mesh = SubResource("NorthBoundary_mesh")
+material_override = SubResource("wall_mat")
+[node name="WestBoundary" type="StaticBody3D" parent="Geometry" groups=["camera_occluder"]]
+position = Vector3(-10,0.5,-23)
+rotation = Vector3(0, 0, 0)
+[node name="Collision" type="CollisionShape3D" parent="Geometry/WestBoundary"]
+shape = SubResource("WestBoundary_shape")
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/WestBoundary"]
+mesh = SubResource("WestBoundary_mesh")
+material_override = SubResource("wall_mat")
+[node name="EastBoundary" type="StaticBody3D" parent="Geometry" groups=["camera_occluder"]]
+position = Vector3(10,0.5,-23)
+rotation = Vector3(0, 0, 0)
+[node name="Collision" type="CollisionShape3D" parent="Geometry/EastBoundary"]
+shape = SubResource("EastBoundary_shape")
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/EastBoundary"]
+mesh = SubResource("EastBoundary_mesh")
+material_override = SubResource("wall_mat")
+[node name="Cover" type="StaticBody3D" parent="Geometry" groups=["camera_occluder"]]
+position = Vector3(0,1.25,-23)
+rotation = Vector3(0, 0, 0)
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Cover"]
+shape = SubResource("Cover_shape")
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Cover"]
+mesh = SubResource("Cover_mesh")
+material_override = SubResource("wall_mat")
+[node name="CorridorWest" type="StaticBody3D" parent="Geometry" groups=["camera_occluder"]]
+position = Vector3(6,1.25,-24)
+rotation = Vector3(0, 0, 0)
+[node name="Collision" type="CollisionShape3D" parent="Geometry/CorridorWest"]
+shape = SubResource("CorridorWest_shape")
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/CorridorWest"]
+mesh = SubResource("CorridorWest_mesh")
+material_override = SubResource("wall_mat")
+[node name="CorridorEast" type="StaticBody3D" parent="Geometry" groups=["camera_occluder"]]
+position = Vector3(9,1.25,-24)
+rotation = Vector3(0, 0, 0)
+[node name="Collision" type="CollisionShape3D" parent="Geometry/CorridorEast"]
+shape = SubResource("CorridorEast_shape")
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/CorridorEast"]
+mesh = SubResource("CorridorEast_mesh")
+material_override = SubResource("wall_mat")
+[node name="Step1" type="StaticBody3D" parent="Geometry"]
+position = Vector3(-6,0.12,-20)
+rotation = Vector3(0, 0, 0)
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Step1"]
+shape = SubResource("Step1_shape")
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Step1"]
+mesh = SubResource("Step1_mesh")
+material_override = SubResource("floor_mat")
+[node name="Step2" type="StaticBody3D" parent="Geometry"]
+position = Vector3(-6,0.24,-20.65)
+rotation = Vector3(0, 0, 0)
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Step2"]
+shape = SubResource("Step2_shape")
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Step2"]
+mesh = SubResource("Step2_mesh")
+material_override = SubResource("floor_mat")
+[node name="Step3" type="StaticBody3D" parent="Geometry"]
+position = Vector3(-6,0.36,-21.3)
+rotation = Vector3(0, 0, 0)
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Step3"]
+shape = SubResource("Step3_shape")
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Step3"]
+mesh = SubResource("Step3_mesh")
+material_override = SubResource("floor_mat")
+[node name="Landing" type="StaticBody3D" parent="Geometry"]
+position = Vector3(-6,0.36,-22.6)
+rotation = Vector3(0, 0, 0)
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Landing"]
+shape = SubResource("Landing_shape")
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Landing"]
+mesh = SubResource("Landing_mesh")
+material_override = SubResource("floor_mat")
+[node name="Ramp" type="StaticBody3D" parent="Geometry"]
+position = Vector3(-6,0.26,-25.1)
+rotation = Vector3(-0.1780939, 0, 0)
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Ramp"]
+shape = SubResource("Ramp_shape")
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Ramp"]
+mesh = SubResource("Ramp_mesh")
+material_override = SubResource("floor_mat")
+[node name="PatrolPoints" type="Node3D" parent="."]
+[node name="A0" type="Marker3D" parent="PatrolPoints"]
+position = Vector3(-6,0,-19)
+[node name="A1" type="Marker3D" parent="PatrolPoints"]
+position = Vector3(-6,0.72,-22.4)
+[node name="A2" type="Marker3D" parent="PatrolPoints"]
+position = Vector3(-6,0,-28)
+[node name="A3" type="Marker3D" parent="PatrolPoints"]
+position = Vector3(-3,0,-28)
+[node name="A4" type="Marker3D" parent="PatrolPoints"]
+position = Vector3(-3,0,-18)
+[node name="B0" type="Marker3D" parent="PatrolPoints"]
+position = Vector3(4,0,-28)
+[node name="B1" type="Marker3D" parent="PatrolPoints"]
+position = Vector3(7.5,0,-28)
+[node name="B2" type="Marker3D" parent="PatrolPoints"]
+position = Vector3(7.5,0,-20)
+[node name="B3" type="Marker3D" parent="PatrolPoints"]
+position = Vector3(4,0,-20)
+[node name="PatrollerA" parent="." node_paths=PackedStringArray("patrol_points") instance=ExtResource("enemy")]
+position = Vector3(-6,0,-18)
+patrol_points = [NodePath("../PatrolPoints/A0"), NodePath("../PatrolPoints/A1"), NodePath("../PatrolPoints/A2"), NodePath("../PatrolPoints/A3"), NodePath("../PatrolPoints/A4")]
+[node name="PatrollerB" parent="." node_paths=PackedStringArray("patrol_points") instance=ExtResource("enemy")]
+position = Vector3(4,0,-28)
+patrol_points = [NodePath("../PatrolPoints/B0"), NodePath("../PatrolPoints/B1"), NodePath("../PatrolPoints/B2"), NodePath("../PatrolPoints/B3")]
+[node name="Sentry" parent="." instance=ExtResource("enemy")]
+position = Vector3(3, 0, -22)
+rotation = Vector3(0, 3.1415927, 0)
+[node name="Sign" type="Label3D" parent="."]
+position = Vector3(0, 3, -17)
+text = "IA / ENTRADA AO NORTE
+Amarelo: ataque em preparação / F3 reinicia"
+billboard = 1
+font_size = 30
+pixel_size = 0.01
