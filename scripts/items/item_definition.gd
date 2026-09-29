@@ -14,7 +14,7 @@ enum WeightClass { NONE, LIGHT, MEDIUM, HEAVY }
 @export var world_visual: PackedScene
 @export var equip_slot: EquipSlot = EquipSlot.NONE
 @export var weight_class: WeightClass = WeightClass.NONE
-@export var modifiers: Array[ModifierDefinition] = []
+@export var modifiers: Array = []
 @export var use_effect: ItemUseEffect
 
 func is_valid() -> bool:

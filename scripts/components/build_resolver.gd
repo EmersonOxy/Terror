@@ -6,10 +6,10 @@ signal build_activated(build_id: StringName)
 signal build_deactivated(build_id: StringName)
 
 @export var equipment: EquipmentComponent
-@export var modifiers: PlayerModifiers
-@export var build_definitions: Array[BuildDefinition] = []
+@export var modifiers: Node
+@export var build_definitions: Array = []
 
-var active_build: BuildDefinition
+var active_build: Resource
 
 func _ready() -> void:
 	equipment.item_equipped.connect(_on_equipped)
@@ -34,7 +34,7 @@ func _recalculate_build() -> void:
 	var body = equipment.get_equipped(ItemDefinition.EquipSlot.BODY)
 	var weapon = equipment.get_equipped(ItemDefinition.EquipSlot.WEAPON)
 	
-	var new_build: BuildDefinition = null
+	var new_build: Resource = null
 	
 	if head != null and body != null and weapon != null:
 		var w_head = head.definition.weight_class
@@ -59,7 +59,7 @@ func _recalculate_build() -> void:
 			
 		build_changed.emit()
 
-func _find_build_for_weight(weight: ItemDefinition.WeightClass) -> BuildDefinition:
+func _find_build_for_weight(weight: ItemDefinition.WeightClass) -> Resource:
 	for b in build_definitions:
 		if b != null and b.required_weight_class == weight:
 			return b
